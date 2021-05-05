@@ -233,7 +233,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     fn_chk = false;
                     ln_chk = false;
 
-
                     if (!bday.getText().equals("")){
                         String[] strbday = bday.getText().toString().split("/");
                         final Calendar c = Calendar.getInstance();
@@ -248,11 +247,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                 bday.setBackgroundResource(R.drawable.error);
                                 bday_lbl.setTextColor(Color.parseColor("#ef5350"));
                                 Toast.makeText(context, "Invalid Birthdate", Toast.LENGTH_SHORT).show();
-                            } else if (mMonth < Integer.parseInt(strbday[0])){
-                                bday.setBackgroundResource(R.drawable.error);
-                                bday_lbl.setTextColor(Color.parseColor("#ef5350"));
-                                Toast.makeText(context, "Invalid Birthdate", Toast.LENGTH_SHORT).show();
-                            } else if (mYear < Integer.parseInt(strbday[2])) {
+                            } else if (mMonth + 1 < Integer.parseInt(strbday[0])) {
                                 bday.setBackgroundResource(R.drawable.error);
                                 bday_lbl.setTextColor(Color.parseColor("#ef5350"));
                                 Toast.makeText(context, "Invalid Birthdate", Toast.LENGTH_SHORT).show();

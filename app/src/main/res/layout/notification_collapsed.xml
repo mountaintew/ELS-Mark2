@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:gravity="left"
+    android:paddingStart="45dp"
+    android:paddingEnd="45dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:src="@drawable/ic_baseline_location_on_24_a"
+        />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/productsans"
+            style="@style/TextAppearance.Compat.Notification.Title"
+            android:text="@string/notiftitle"
+            android:textSize="9sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            style="@style/TextAppearance.Compat.Notification.Info"
+            android:fontFamily="@font/productsans"
+            android:text="@string/restitle"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+        />
+
+</LinearLayout>

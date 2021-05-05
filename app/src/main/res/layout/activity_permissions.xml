@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Permissions">
+
+
+    <!--layout 1-->
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
+            app:lottie_fileName="locationaccess.json"
+            app:lottie_loop="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationY="-50dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="@string/location_permission"
+            android:textColor="#555555"
+            android:textSize="14sp"
+            android:translationY="-50dp"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/ab1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="45dp"
+        android:background="@drawable/allowbuttons"
+        android:fontFamily="@font/productsans"
+        android:text="Allow"
+        android:textAllCaps="false"/>
+
+
+    <!--layout 2-->
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
+            app:lottie_fileName="notification.json"
+            app:lottie_loop="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="@string/enablenotif"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="@string/notif_permission"
+            android:textColor="#555555"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="left"
+            android:paddingStart="25dp"
+            android:text="@string/n_step1"
+            android:textColor="#000"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="left"
+            android:paddingStart="25dp"
+            android:text="@string/n_step2"
+            android:textColor="#000"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="left"
+            android:paddingStart="25dp"
+            android:text="@string/n_step3"
+            android:textColor="#000"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="left"
+            android:paddingStart="25dp"
+            android:text="@string/n_step4"
+            android:textColor="#000"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="@string/n_step5"
+            android:textColor="#555555"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ab2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="45dp"
+        android:background="@drawable/allowbuttons"
+        android:fontFamily="@font/productsans"
+        android:text="Open Settings"
+        android:visibility="gone"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>

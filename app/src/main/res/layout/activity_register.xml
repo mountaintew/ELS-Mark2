@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Register">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/check"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="false"
+        android:scaleY="0.2"
+        android:scaleX="0.2"
+        android:visibility="gone"
+        app:lottie_enableMergePathsForKitKatAndAbove="true"
+        app:lottie_fileName="check.json"
+        app:lottie_loop="false" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttons">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:paddingTop="45dp"
+            android:paddingBottom="45dp"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="Personal\nInformation"
+            android:textColor="@color/dark"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:text="@string/info_details"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:text="@string/required"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/reg1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/fname_lbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="45dp"
+                    android:fontFamily="@font/productsans"
+                    android:text="@string/firstname"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="45dp"
+                    android:textSize="11sp"
+                    android:layout_weight="1"
+                    android:gravity="right|bottom"
+                    android:layout_marginEnd="45dp"
+                    android:fontFamily="@font/productsans"
+                    android:text="Required"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+
+
+
+            <EditText
+                android:id="@+id/fnameEt"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/bordered"
+                android:fontFamily="@font/productsans"
+                android:hint="@string/firstname"
+                android:inputType="textCapWords"
+                android:maxLength="30"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/lname_lbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="45dp"
+                    android:fontFamily="@font/productsans"
+                    android:text="@string/lastname"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="45dp"
+                    android:textSize="11sp"
+                    android:layout_weight="1"
+                    android:gravity="right|bottom"
+                    android:layout_marginEnd="45dp"
+                    android:fontFamily="@font/productsans"
+                    android:text="Required"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/lnameEt"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/bordered"
+                android:fontFamily="@font/productsans"
+                android:hint="@string/lastname"
+                android:inputType="textCapWords"
+                android:maxLength="30"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/bday_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/bday"
+                android:textColor="@color/black"
+                />
+
+            <EditText
+                android:id="@+id/bday"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/bordered"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/bold"
+                android:hint="@string/bdayformat"
+                android:inputType="date"
+                android:maxLength="10"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/sex"
+                android:textColor="@color/black"
+                />
+
+            <Spinner
+                android:id="@+id/sex"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="45dp"
+                android:background="@drawable/spinner"
+                android:entries="@array/sex_entries" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/type"
+                android:textColor="@color/black"
+                />
+
+            <Spinner
+                android:id="@+id/bloodtype"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="85dp"
+                android:background="@drawable/spinner"
+                android:entries="@array/bloodtypes"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/reg2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/weight"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="45dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/weightEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bordered"
+                    android:hint="Weight"
+                    android:paddingStart="15dp"
+                    android:inputType="numberDecimal"
+                    android:paddingEnd="15dp"/>
+
+                <Spinner
+                    android:id="@+id/weight_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner"
+                    android:entries="@array/weight_units"
+                    android:paddingRight="15dp"/>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/height"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="45dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/heightEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bordered"
+                    android:hint="Height"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"/>
+
+                <Spinner
+                    android:id="@+id/height_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner"
+                    android:entries="@array/height_units"
+                    android:inputType="numberDecimal"
+                    android:paddingRight="15dp"/>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/medcon"
+                android:textColor="@color/black"
+                />
+            <AutoCompleteTextView
+                android:id="@+id/medcon"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/bordered"
+                android:fontFamily="@font/productsans"
+                android:hint="Medical Conditions"
+                android:inputType="textCapWords"
+                android:maxLength="30"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/ar"
+                android:textColor="@color/black"
+                />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/ar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/bordered"
+                android:fontFamily="@font/productsans"
+                android:hint="Allergies &amp; Reactions"
+                android:inputType="textCapWords"
+                android:maxLength="30"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/productsans"
+                android:text="@string/mednote"
+                android:textColor="@color/black"
+                />
+
+
+            <EditText
+                android:id="@+id/mednote"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginBottom="85dp"
+                android:background="@drawable/bordered"
+                android:fontFamily="@font/productsans"
+                android:gravity="left|top"
+                android:hint="Medical Notes"
+                android:inputType="textCapWords"
+                android:maxLines="4"
+                android:lines="4"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/backbtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:elevation="0dp"
+            android:enabled="false"
+            android:fontFamily="@font/productsans"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:visibility="invisible"/>
+        <Button
+            android:id="@+id/nextbtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/productsans"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
+    </LinearLayout>
+</RelativeLayout>

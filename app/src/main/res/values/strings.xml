@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">ELS</string>
+    <string name="app_fullname">Emergency Location System</string>
+    <string name="version">beta ver 2</string>
+    <string name="location_permission">Please enable location access so we could provide your last location in case of emergency.</string>
+    <string name="locdeny">Without this permission the app is unable to locate you in case of emergency.</string>
+    <string name="enablenotif">Enable Notifications</string>
+    <string name="notif_permission">Please allow the app to show notifications on the lockscreen.</string>
+    <string name="n_step1">• Go to Settings</string>
+    <string name="n_step2">• Open Notification settings</string>
+    <string name="n_step3">• App Notifications</string>
+    <string name="n_step4">• Enable notifications for ELS app</string>
+    <string name="n_step5">This notification will contain all the necessary information in case of emergency.</string>
+    <string name="connect">Please connect to the internet</string>
+    <string name="invalidcode">Invalid verification code</string>
+    <string name="info_details">This will serve as your in case of emergency details.</string>
+    <string name="required">Please fill-up all the required fields</string>
+    <string name="firstname">Firstname:</string>
+    <string name="lastname">Lastname:</string>
+    <string name="bday">Birthdate:</string>
+    <string name="bdayformat">MM/DD/YYYY</string>
+    <string name="sex">Sex:</string>
+    <string name="state">State:</string>
+    <string name="type">Blood Type:</string>
+    <string name="medcon">Medical Conditions:</string>
+    <string name="ar">Allergies &amp; Reactions:</string>
+    <string name="mednote">Medical Notes:</string>
+    <string name="weight">Weight:</string>
+    <string name="height">Height:</string>
+    <string name="notiftitle">Emergency Location System</string>
+    <string name="restitle">Resident Information</string>
+    <string-array name="weight_units">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+    <string-array name="height_units">
+        <item>cm</item>
+        <item>m</item>
+        <item>ft</item>
+        <item>in</item>
+    </string-array>
+
+    <string-array name="bloodtypes">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>Not known</item>
+    </string-array>
+    <string-array name="sex_entries">
+        <item>Decline to state</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="conditions">
+        <item>Hypertension</item>
+        <item>Hyperlipidemia</item>
+        <item>Diabetes</item>
+        <item>Back Pain</item>
+        <item>Anxiety</item>
+        <item>Obesity</item>
+        <item>Allergic Rhinitis</item>
+        <item>Reflux Esophagitis</item>
+        <item>Respiratory Problems</item>
+        <item>Hypothyroidism</item>
+        <item>Visually Impaired</item>
+        <item>Visual Refractive Errors</item>
+        <item>Osteoarthritis</item>
+        <item>Fibromyalgia / Myositis</item>
+        <item>Malaise and Fatigue</item>
+        <item>Pain in Joint</item>
+        <item>Acute Laryngopharyngitis</item>
+        <item>Acute Maxillary Sinusitis</item>
+        <item>Major Depressive Disorder</item>
+        <item>Acute Bronchitis</item>
+        <item>Asthma</item>
+        <item>Depressive Disorder</item>
+        <item>Nail Fungus</item>
+        <item>Coronary Atherosclerosis</item>
+        <item>Urinary Tract Infection</item>
+    </string-array>
+    <string-array name="aller">
+        <item>Grass and Tree Pollen</item>
+        <item>Dust mites</item>
+        <item>Animal Dander</item>
+        <item>Tiny flakes of skin or hair</item>
+        <item>Nuts, Fruits, Shellfish, Eggs and Cows Milk</item>
+        <item>Insect bites and Stings</item>
+        <item>Ibuprofen</item>
+        <item>Aspirin</item>
+        <item>Antibiotics</item>
+        <item>Latex</item>
+        <item>Mould</item>
+    </string-array>
+
+</resources>

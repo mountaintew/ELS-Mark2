@@ -15,10 +15,12 @@
     <string name="invalidcode">Invalid verification code</string>
     <string name="info_details">This will serve as your in case of emergency details.</string>
     <string name="required">Please fill-up all the required fields</string>
+    <string name="viewinfo">View Info</string>
     <string name="firstname">Firstname:</string>
     <string name="lastname">Lastname:</string>
     <string name="bday">Birthdate:</string>
     <string name="bdayformat">MM/DD/YYYY</string>
+    <string name="age">Age:</string>
     <string name="sex">Sex:</string>
     <string name="state">State:</string>
     <string name="type">Blood Type:</string>

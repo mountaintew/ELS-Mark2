@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -28,11 +30,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,11 +53,14 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 public class Dashboard extends AppCompatActivity {
     Context context;
     ToggleButton toggleLoc, toggleNotif;
-    TextView name, mobile, bday, sex, btype, height, weight, state;
-    String fullname, bd, sx, bt, he, we, st, age;
+    TextView name, mobile;
+    String fullname, bd, sx, bt, he, we, st, age, mc, ar, mn;
+    Button viewinfo;
     private ImageView profilepic;
     public Uri imageUri;
     private FirebaseStorage storage;
@@ -65,8 +73,7 @@ public class Dashboard extends AppCompatActivity {
     Runnable runnable;
     int interval;
     boolean accessedLoc;
-
-
+    Typeface pSans;
     private FusedLocationProviderClient fusedLocationClient;
     String lat, lng;
 
@@ -104,6 +111,8 @@ public class Dashboard extends AppCompatActivity {
         //NotificationManager
         notificationManager = NotificationManagerCompat.from(this);
 
+        //Button
+        viewinfo = findViewById(R.id.viewinfo);
 
         //ToggleButton
         toggleLoc = findViewById(R.id.toggleLoc);
@@ -112,12 +121,6 @@ public class Dashboard extends AppCompatActivity {
         //EditText
         name = findViewById(R.id.name);
         mobile = findViewById(R.id.mobile);
-        bday = findViewById(R.id.bday);
-        sex = findViewById(R.id.sex);
-        btype = findViewById(R.id.btype);
-        height = findViewById(R.id.height);
-        weight = findViewById(R.id.weight);
-        state = findViewById(R.id.state);
 
         fullname = user.getString("firstname", "") + " " + user.getString("lastname", "");
         bd = user.getString("bday", "n/a");
@@ -126,21 +129,19 @@ public class Dashboard extends AppCompatActivity {
         bt = user.getString("bloodtype", "");
         we = user.getString("weight", "n/a");
         he = user.getString("height", "n/a");
+        mc = user.getString("medcon", "n/a");
+        ar = user.getString("allergy", "n/a");
+        mn = user.getString("notes", "n/a");
         st = "Safe";
 
         name.setText(fullname);
         mobile.setText(mobileNumber);
-        bday.setText(bd);
-        sex.setText(sx);
-        btype.setText(bt);
-        height.setText(he);
-        weight.setText(we);
-        state.setText(st);
         profilepic = findViewById(R.id.profilepic);
 
         sendOnChannel1(name.getRootView());
         vibrate();
 
+        pSans = ResourcesCompat.getFont(context, R.font.productsans);
 
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,8 +154,14 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (toggleLoc.isChecked()){
-                    vibrate();
+                    if (toggleNotif.isChecked()){
+                        sendOnChannel2(name.getRootView());
+                    }
                 } else {
+                    if (toggleNotif.isChecked()){
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.cancel(2);
+                    }
                 }
                 if(ContextCompat.checkSelfPermission(Dashboard.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(Dashboard.this,new String[]{
@@ -171,16 +178,74 @@ public class Dashboard extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (toggleNotif.isChecked()){
                     sendOnChannel1(name.getRootView());
-                    vibrate();
+                    if (toggleLoc.isChecked()){
+                        sendOnChannel2(name.getRootView());
+                    }
                 } else {
                     NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                    notificationManager.cancel(1);
+                    notificationManager.cancelAll();
+
                 }
             }
         });
 
 
+        viewinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInfo();
+            }
+        });
+
     }
+
+    private void openInfo() {
+        TextView info_name, info_mobile, info_bday, info_sex, info_btype, info_height, info_weight, info_age, info_medcon, info_ar, info_mednote;
+        LinearLayout viewinfo;
+        AlertDialog.Builder infoDialog  = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.viewinfo, null);
+
+        viewinfo = view.findViewById(R.id.viewinfo);
+        info_name = view.findViewById(R.id.info_name);
+        info_bday = view.findViewById(R.id.info_bday);
+        info_sex  = view.findViewById(R.id.info_sex);
+        info_btype = view.findViewById(R.id.info_btype);
+        info_height = view.findViewById(R.id.info_height);
+        info_weight = view.findViewById(R.id.info_weight);
+        info_age = view.findViewById(R.id.info_age);
+        info_medcon = view.findViewById(R.id.info_medcon);
+        info_ar = view.findViewById(R.id.info_ar);
+        info_mednote = view.findViewById(R.id.info_mednote);
+        info_mobile = view.findViewById(R.id.info_mobile);
+
+        info_name.setText(fullname);
+        info_bday.setText(bd);
+        info_sex.setText(sx);
+        info_btype.setText(bt);
+        info_height.setText(he);
+        info_weight.setText(we);
+        info_age.setText(age);
+        info_medcon.setText(mc);
+        info_ar.setText(ar);
+        info_mednote.setText(mn);
+        info_mobile.setText(mobileNumber);
+
+        infoDialog.setView(view);
+        infoDialog.setCancelable(true);
+        AlertDialog alertDialog = infoDialog.create();
+        alertDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.show();
+
+        viewinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     protected void onResume() {
@@ -202,8 +267,7 @@ public class Dashboard extends AppCompatActivity {
                                     if (location != null) {
                                         lat = String.valueOf(location.getLatitude());
                                         lng = String.valueOf(location.getLongitude());
-
-                                        Toast.makeText(Dashboard.this, "lat: " + lat + "\nlng: " + lng, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Dashboard.this, "lat: " + lat + "\nlng: " + lng + toggleLoc.isChecked(), Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(context, "no location", Toast.LENGTH_SHORT).show();
                                     }
@@ -283,15 +347,26 @@ public class Dashboard extends AppCompatActivity {
                 R.layout.notification_collapsed);
         RemoteViews expandedView = new RemoteViews(getPackageName(),
                 R.layout.notification_expanded);
+        String mn_short = "";
+        if (mn.length() > 70){
+            mn_short = mn.substring(0,70) + "...";
+        }
 
         expandedView.setTextViewText(R.id.notif_name, fullname);
-        expandedView.setTextViewText(R.id.notif_cont, "testcontact");
+        expandedView.setTextViewText(R.id.notif_cont, "ice contact");
         expandedView.setTextViewText(R.id.notif_bday, bd);
         expandedView.setTextViewText(R.id.notif_age, age);
         expandedView.setTextViewText(R.id.notif_sex, sx);
         expandedView.setTextViewText(R.id.notif_height, he);
         expandedView.setTextViewText(R.id.notif_weight, we);
         expandedView.setTextViewText(R.id.notif_state, st);
+        expandedView.setTextViewText(R.id.notif_medcon, mc);
+        expandedView.setTextViewText(R.id.notif_ar, ar);
+        expandedView.setTextViewText(R.id.notif_mednote, mn_short);
+
+
+
+
         //set the profile pic here
 
 
@@ -325,5 +400,9 @@ public class Dashboard extends AppCompatActivity {
         } else {
             return;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        this.onPause();
     }
 }

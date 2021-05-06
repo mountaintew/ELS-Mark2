@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main">#f2c900</color>
+    <color name="main">#fcbc22</color>
     <color name="dark">#222222</color>
-    <color name="metatext">#989898</color>
+    <color name="red">#ef5350</color>
+    <color name="green">#43a047</color>
+    <color name="metatext">#8F8F8F</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -10,5 +12,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 </resources>
 

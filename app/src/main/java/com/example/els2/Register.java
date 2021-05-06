@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     LottieAnimationView check;
     TextView title, fname_lbl, lname_lbl, bday_lbl;
     EditText fname, lname, bday, weight, height, mednote;
-
+    String age;
     Spinner sex, bloodtype, weight_unit, height_unit;
     LinearLayout reg1, reg2, buttons;
     ScrollView scrollView;
@@ -126,6 +126,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         fname_lbl = findViewById(R.id.fname_lbl);
         lname_lbl = findViewById(R.id.lname_lbl);
         bday_lbl = findViewById(R.id.bday_lbl);
+        age = "";
 
         //Buttons
         nextbtn = findViewById(R.id.nextbtn);
@@ -152,6 +153,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         bday.setOnClickListener(this);
         nextbtn.setOnClickListener(this);
         backbtn.setOnClickListener(this);
+        bday.setText("");
 
         fname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -233,14 +235,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     fn_chk = false;
                     ln_chk = false;
 
-                    if (!bday.getText().equals("")){
+
+                    if (bday.getText().toString().equals("")){
+                        registerstate = 1;
+                        reg1.startAnimation(slide_down);
+                        reg1.setVisibility(View.GONE);
+                        reg2.startAnimation(slide_up);
+                        reg2.setVisibility(View.VISIBLE);
+                        backbtn.startAnimation(fif);
+                        backbtn.setVisibility(View.VISIBLE);
+                        backbtn.setEnabled(true);
+                        nextbtn.startAnimation(fif);
+                        nextbtn.setText("Submit");
+                    } else {
                         String[] strbday = bday.getText().toString().split("/");
                         final Calendar c = Calendar.getInstance();
                         mYear = c.get(Calendar.YEAR);
                         mMonth = c.get(Calendar.MONTH);
                         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-                        String age = getAge(Integer.parseInt(strbday[2]), Integer.parseInt(strbday[0]), Integer.parseInt(strbday[1]));
+                        age = getAge(Integer.parseInt(strbday[2]), Integer.parseInt(strbday[0]), Integer.parseInt(strbday[1]));
 
                         if (Integer.parseInt(age) < 0) {
                             if (mDay < Integer.parseInt(strbday[1])){
@@ -274,13 +288,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             backbtn.setEnabled(true);
                             nextbtn.startAnimation(fif);
                             nextbtn.setText("Submit");
-
                         }
                     }
-
-
-
-
 
                 }
             } else if (registerstate == 1){
@@ -294,6 +303,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                 if (!bday.getText().toString().equals("")){
                     bd = bday.getText().toString();
+                } else {
+                    bd = "n/a";
                 }
                 sx = sex.getSelectedItem().toString();
                 bt = bloodtype.getSelectedItem().toString();
@@ -324,9 +335,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 } else {
                     mn = "n/a";
                 }
+                int ag = 0;
+                if (!age.equals("")){
+                    ag = Integer.parseInt(age);
+                }
                 //fn, ln, bd, sx, bt, we, he, mc, al, mn;
                 // firstname,  lastname,  birthdate,  sex,  bloodtype,  weight,  height,  conditions,  allergies,  mednotes,  number,  state, boolean toggled
-                UserHelper userHelper = new UserHelper(fn, ln, bd, sx, bt, we, he, mc, al, mn, mobileNumber, "Safe", false);
+                UserHelper userHelper = new UserHelper(ag, fn, ln, bd, sx, bt, we, he, mc, al, mn, mobileNumber, "Safe", false);
 
                 //SENDS THE DATA TO THE DATABASE IF CONNECTED TO THE INTERNET ELSE STORE THE DATA IN TO LOCAL STORAGE
                 if (isConnected){
@@ -353,6 +368,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         }
                     });
                 }
+                editor.putString("age", age);
                 editor.putString("firstname", fn);
                 editor.putString("lastname", ln);
                 editor.putString("bday", bd);
@@ -434,4 +450,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         String ageS = ageInt.toString();
         return ageS;
     }
+    @Override
+    public void onBackPressed() {}
 }

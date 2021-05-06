@@ -16,20 +16,12 @@
         android:backgroundTint="@color/white">
 
 
-
-
-
-
-
-
-
-
-
         <LinearLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="45dp"
+            android:gravity="center"
             android:orientation="vertical">
 
 
@@ -56,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsans"
                     android:gravity="center_vertical"
-                    android:text="Lester Arana"
+                    android:text="Name"
                     android:textColor="@color/dark"
                     android:textSize="26sp" />
 
@@ -236,8 +228,75 @@
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:textAllCaps="false"
+                        android:text="View complete information"
+                        android:background="@null"
+                        android:clickable="true"
+                        android:textColor="@color/dark"
+                        android:textSize="12sp"
+                        android:focusable="true" />
+
+                </LinearLayout>
             </LinearLayout>
+
+
+
+
+
+
+
+
         </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/notif_layout"
+        android:orientation="horizontal"
+        android:layout_above="@id/location_layout"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:text="Notifications"
+            android:textSize="16sp"
+            android:fontFamily="@font/productsans"
+            android:textColor="@color/dark"
+            />
+        <ToggleButton
+            android:id="@+id/toggleNotif"
+            android:layout_width="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="55dp"
+            android:background="@drawable/toggle_selector"
+            android:textOff=""
+            android:textOn=""
+            android:checked="true"
+            />
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/location_layout"
         android:orientation="horizontal"
@@ -250,16 +309,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
             android:layout_marginLeft="25dp"
-            android:text="Location"
-            android:textSize="16sp"
+            android:layout_weight="1"
             android:fontFamily="@font/productsans"
+            android:gravity="center_vertical"
+            android:text="Location"
             android:textColor="@color/dark"
-            />
+            android:textSize="16sp" />
+
         <ToggleButton
-            android:id="@+id/toggle"
+            android:id="@+id/toggleLoc"
             android:layout_width="55dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -271,22 +330,67 @@
             />
 
     </LinearLayout>
-    <Button
-        android:id="@+id/embtn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/btncircle"
-        android:backgroundTint="#ef5350"
-        android:fontFamily="@font/bold"
+
+
+
+        <Button
+            android:id="@+id/embtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:backgroundTint="#ef5350"
+            android:fontFamily="@font/bold"
+            android:layout_alignParentBottom="true"
+            android:text="Emergency"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"
+            android:layout_margin="15dp"
+            android:textColor="@color/white"/>
+
+
+
+
+
+    <!--<HorizontalScrollView
         android:layout_alignParentBottom="true"
-        android:text="Emergency"
-        android:layout_marginLeft="5dp"
-        android:textAllCaps="false"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColor="@color/white"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_prof_sub"
+                android:backgroundTint="@color/metatext"
+                android:layout_height="110dp">
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_prof_sub"
+                android:backgroundTint="@color/metatext"
+                android:layout_height="110dp">
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_prof_sub"
+                android:backgroundTint="@color/metatext"
+                android:layout_height="110dp">
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_prof_sub"
+                android:backgroundTint="@color/metatext"
+                android:layout_height="110dp">
+            </RelativeLayout>
+        </LinearLayout>
+    </HorizontalScrollView>-->
+
 
 
 

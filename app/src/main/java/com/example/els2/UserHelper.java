@@ -3,8 +3,10 @@ package com.example.els2;
 public class UserHelper {
     String firstname, lastname, birthdate, sex, bloodtype, weight, height, conditions, allergies, mednotes, number, state;
     boolean toggled;
+    int age;
 
-    public UserHelper(String firstname, String lastname, String birthdate, String sex, String bloodtype, String weight, String height, String conditions, String allergies, String mednotes, String number, String state, boolean toggled) {
+    public UserHelper(int age, String firstname, String lastname, String birthdate, String sex, String bloodtype, String weight, String height, String conditions, String allergies, String mednotes, String number, String state, boolean toggled) {
+        this.age = age;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
@@ -21,6 +23,14 @@ public class UserHelper {
     }
 
     public UserHelper() {
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getFirstname() {

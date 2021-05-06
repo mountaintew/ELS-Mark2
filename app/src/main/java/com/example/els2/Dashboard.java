@@ -10,21 +10,24 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -35,6 +38,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,9 +50,9 @@ import com.google.firebase.storage.UploadTask;
 
 public class Dashboard extends AppCompatActivity {
     Context context;
-    ToggleButton toggle;
+    ToggleButton toggleLoc, toggleNotif;
     TextView name, mobile, bday, sex, btype, height, weight, state;
-    String fullname, bd, sx, bt, he, we, st;
+    String fullname, bd, sx, bt, he, we, st, age;
     private ImageView profilepic;
     public Uri imageUri;
     private FirebaseStorage storage;
@@ -58,9 +63,12 @@ public class Dashboard extends AppCompatActivity {
 
     Handler handler = new Handler();
     Runnable runnable;
-    int interval = 5000;
+    int interval;
     boolean accessedLoc;
 
+
+    private FusedLocationProviderClient fusedLocationClient;
+    String lat, lng;
 
     private NotificationManagerCompat notificationManager;
     @Override
@@ -98,7 +106,8 @@ public class Dashboard extends AppCompatActivity {
 
 
         //ToggleButton
-        toggle = findViewById(R.id.toggle);
+        toggleLoc = findViewById(R.id.toggleLoc);
+        toggleNotif = findViewById(R.id.toggleNotif);
 
         //EditText
         name = findViewById(R.id.name);
@@ -112,6 +121,7 @@ public class Dashboard extends AppCompatActivity {
 
         fullname = user.getString("firstname", "") + " " + user.getString("lastname", "");
         bd = user.getString("bday", "n/a");
+        age = user.getString("age", "n/a");
         sx = user.getString("sex", "");
         bt = user.getString("bloodtype", "");
         we = user.getString("weight", "n/a");
@@ -128,20 +138,21 @@ public class Dashboard extends AppCompatActivity {
         state.setText(st);
         profilepic = findViewById(R.id.profilepic);
 
+        sendOnChannel1(name.getRootView());
         vibrate();
+
+
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 choosePicture();
             }
         });
-
-        sendOnChannel1(name.getRootView());
-
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        
+        toggleLoc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (toggle.isChecked()){
+                if (toggleLoc.isChecked()){
                     vibrate();
                 } else {
                 }
@@ -154,21 +165,55 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         });
+        
+        toggleNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (toggleNotif.isChecked()){
+                    sendOnChannel1(name.getRootView());
+                    vibrate();
+                } else {
+                    NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.cancel(1);
+                }
+            }
+        });
+
+
     }
 
     @Override
     protected void onResume() {
+        interval = 10000;
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, interval);
-                if (toggle.isChecked()){
+                if (toggleLoc.isChecked()){
                     //send location
+                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(Dashboard.this);
+                    if (ActivityCompat.checkSelfPermission(Dashboard.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Dashboard.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        askPermission();
+                    }
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(Dashboard.this, new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                   
+                                    if (location != null) {
+                                        lat = String.valueOf(location.getLatitude());
+                                        lng = String.valueOf(location.getLongitude());
 
+                                        Toast.makeText(Dashboard.this, "lat: " + lat + "\nlng: " + lng, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "no location", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 } else {
                     //stop sending and state safe
                 }
             }
-        }, 5000);
+        }, interval);
         super.onResume();
     }
     private void choosePicture() {
@@ -240,12 +285,15 @@ public class Dashboard extends AppCompatActivity {
                 R.layout.notification_expanded);
 
         expandedView.setTextViewText(R.id.notif_name, fullname);
-        expandedView.setTextViewText(R.id.notif_cont, "test");
+        expandedView.setTextViewText(R.id.notif_cont, "testcontact");
         expandedView.setTextViewText(R.id.notif_bday, bd);
+        expandedView.setTextViewText(R.id.notif_age, age);
         expandedView.setTextViewText(R.id.notif_sex, sx);
         expandedView.setTextViewText(R.id.notif_height, he);
         expandedView.setTextViewText(R.id.notif_weight, we);
         expandedView.setTextViewText(R.id.notif_state, st);
+        //set the profile pic here
+
 
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_baseline_location_on_24)
@@ -259,7 +307,6 @@ public class Dashboard extends AppCompatActivity {
 
         notificationManager.notify(1, notification);
     }
-
     public void sendOnChannel2(View v) {
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_2_ID)
                 .setSmallIcon(R.drawable.ic_baseline_location_on_24)
@@ -269,5 +316,14 @@ public class Dashboard extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
         notificationManager.notify(2, notification);
+    }
+    public void askPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            }, 100);
+        } else {
+            return;
+        }
     }
 }

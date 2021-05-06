@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/productsans"
                 android:gravity="center"
-                android:text="21"
+                android:text=""
                 android:textColor="@color/dark"
                 android:textSize="14sp" />
         </LinearLayout>

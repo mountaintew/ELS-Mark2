@@ -57,7 +57,7 @@ public class CheckOtp extends AppCompatActivity {
     String number;
     SharedPreferences.Editor editor;
 
-    DatabaseReference accounts = FirebaseDatabase.getInstance().getReference("Residents");
+    DatabaseReference accounts = FirebaseDatabase.getInstance().getReference("Users");
     @SuppressLint({"SetTextI18n", "CommitPrefEdits"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,11 +219,37 @@ public class CheckOtp extends AppCompatActivity {
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.exists()){
                                                         //has Account
+                                                        int age = snapshot.child("+63" + mobile).child("age").getValue(Integer.class);
+                                                        String fn = snapshot.child("+63" + mobile).child("firstname").getValue(String.class);
+                                                        String ln = snapshot.child("+63" + mobile).child("lastname").getValue(String.class);
+                                                        String bd = snapshot.child("+63" + mobile).child("birthdate").getValue(String.class);
+                                                        String sx = snapshot.child("+63" + mobile).child("sex").getValue(String.class);
+                                                        String bt = snapshot.child("+63" + mobile).child("bloodtype").getValue(String.class);
+                                                        String we = snapshot.child("+63" + mobile).child("weight").getValue(String.class);
+                                                        String he = snapshot.child("+63" + mobile).child("height").getValue(String.class);
+                                                        String mc = snapshot.child("+63" + mobile).child("conditions").getValue(String.class);
+                                                        String al = snapshot.child("+63" + mobile).child("allergies").getValue(String.class);
+                                                        String mn = snapshot.child("+63" + mobile).child("mednotes").getValue(String.class);
+
                                                         editor.putBoolean("hasMobile",true);
                                                         editor.putBoolean("hasInstructed",true);
                                                         editor.putBoolean("hasRegistered",true);
                                                         editor.putBoolean("hasLocation",true);
+
+                                                        editor.putString("age", String.valueOf(age));
+                                                        editor.putString("firstname", fn);
+                                                        editor.putString("lastname", ln);
+                                                        editor.putString("bday", bd);
+                                                        editor.putString("sex", sx);
+                                                        editor.putString("bloodtype", bt);
+                                                        editor.putString("weight", we);
+                                                        editor.putString("height", he);
+                                                        editor.putString("medcon", mc);
+                                                        editor.putString("allergy", al);
+                                                        editor.putString("notes", mn);
+                                                        editor.putBoolean("hasRegistered", true);
                                                         editor.apply();
+
                                                         Intent i=new Intent(CheckOtp.this, Dashboard.class);
                                                         startActivity(i);
                                                         finish();

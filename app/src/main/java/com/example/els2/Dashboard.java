@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -34,6 +35,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -45,9 +48,15 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -60,7 +69,9 @@ public class Dashboard extends AppCompatActivity {
     ToggleButton toggleLoc, toggleNotif;
     TextView name, mobile;
     String fullname, bd, sx, bt, he, we, st, age, mc, ar, mn;
-    Button viewinfo;
+    Button viewinfo,contactbtn, settingsbtn, settingsclosebtn;
+    ImageView blurblack;
+    LinearLayout settingsLayout;
     private ImageView profilepic;
     public Uri imageUri;
     private FirebaseStorage storage;
@@ -68,7 +79,7 @@ public class Dashboard extends AppCompatActivity {
     String mobileNumber;
     SharedPreferences user;
     SharedPreferences.Editor editor;
-
+    Animation show_up, show_down, fade_out, fade_in;
     Handler handler = new Handler();
     Runnable runnable;
     int interval;
@@ -76,25 +87,18 @@ public class Dashboard extends AppCompatActivity {
     Typeface pSans;
     private FusedLocationProviderClient fusedLocationClient;
     String lat, lng;
-
+    DatabaseReference reference;
     private NotificationManagerCompat notificationManager;
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        if (Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
-        }
-        if (Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        reference = FirebaseDatabase.getInstance().getReference("Users");
 
         startService(new Intent(this, BackgroundService.class));
         context = getApplicationContext();
@@ -113,6 +117,9 @@ public class Dashboard extends AppCompatActivity {
 
         //Button
         viewinfo = findViewById(R.id.viewinfo);
+        contactbtn = findViewById(R.id.contactbtn);
+        settingsbtn = findViewById(R.id.settingsbtn);
+        settingsclosebtn = findViewById(R.id.settingsclosebtn);
 
         //ToggleButton
         toggleLoc = findViewById(R.id.toggleLoc);
@@ -121,6 +128,18 @@ public class Dashboard extends AppCompatActivity {
         //EditText
         name = findViewById(R.id.name);
         mobile = findViewById(R.id.mobile);
+
+        //Animations
+        show_up = AnimationUtils.loadAnimation(context, R.anim.show_up);
+        show_down = AnimationUtils.loadAnimation(context, R.anim.show_down);
+        fade_out = AnimationUtils.loadAnimation(context, R.anim.fof_alt);
+        fade_in = AnimationUtils.loadAnimation(context, R.anim.fif_alt);
+
+        //Layout
+        settingsLayout = findViewById(R.id.settingsLayout);
+
+        //Imageview
+        blurblack = findViewById(R.id.blurblack);
 
         fullname = user.getString("firstname", "") + " " + user.getString("lastname", "");
         bd = user.getString("bday", "n/a");
@@ -157,11 +176,36 @@ public class Dashboard extends AppCompatActivity {
                     if (toggleNotif.isChecked()){
                         sendOnChannel2(name.getRootView());
                     }
+                    Task<Void> q = reference.child(mobileNumber).child("toggled").setValue(true);
+                    q.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(context, "Location turned on", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Please check internet connection", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     if (toggleNotif.isChecked()){
                         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.cancel(2);
                     }
+
+                    Task<Void> q = reference.child(mobileNumber).child("toggled").setValue(false);
+                    q.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(context, "Location turned off", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Please check internet connection", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 if(ContextCompat.checkSelfPermission(Dashboard.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(Dashboard.this,new String[]{
@@ -189,7 +233,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
         viewinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,16 +240,62 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        settingsbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsLayout.startAnimation(show_up);
+                settingsLayout.setVisibility(View.VISIBLE);
+                blurblack.startAnimation(fade_in);
+                blurblack.setVisibility(View.VISIBLE);
+
+                settingsbtn.setEnabled(false);
+
+            }
+        });
+
+        settingsclosebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsLayout.startAnimation(show_down);
+                settingsLayout.setVisibility(View.GONE);
+                blurblack.startAnimation(fade_out);
+                blurblack.setVisibility(View.GONE);
+                settingsbtn.setEnabled(true);
+
+
+            }
+        });
+
+        blurblack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsLayout.startAnimation(show_down);
+                settingsLayout.setVisibility(View.GONE);
+                blurblack.startAnimation(fade_out);
+                blurblack.setVisibility(View.GONE);
+                settingsbtn.setEnabled(true);
+
+            }
+        });
+
+        contactbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askPermissionContacts();
+            }
+        });
     }
 
     private void openInfo() {
         TextView info_name, info_mobile, info_bday, info_sex, info_btype, info_height, info_weight, info_age, info_medcon, info_ar, info_mednote;
         LinearLayout viewinfo;
+        Button editbtn;
         AlertDialog.Builder infoDialog  = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.viewinfo, null);
 
         viewinfo = view.findViewById(R.id.viewinfo);
+        editbtn = view.findViewById(R.id.editbtn);
         info_name = view.findViewById(R.id.info_name);
         info_bday = view.findViewById(R.id.info_bday);
         info_sex  = view.findViewById(R.id.info_sex);
@@ -244,12 +333,40 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        editbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.cancelAll();
+                        Intent i=new Intent(Dashboard.this, Register.class);
+                        i.putExtra("fname" , user.getString("firstname", ""));
+                        i.putExtra("lname" , user.getString("lastname", ""));
+                        i.putExtra("bday" , bd);
+                        i.putExtra("sex" , sx);
+                        i.putExtra("btype" , bt);
+                        i.putExtra("height" , he.equals("n/a") ? "" : he);
+                        i.putExtra("weight" , we.equals("n/a") ? "" : we);
+                        i.putExtra("medcon" , mc);
+                        i.putExtra("ar" , ar);
+                        i.putExtra("mednote" , mn);
+                        i.putExtra("todo" , "edit");
+                        startActivity(i);
+                        finish();
+                        overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
+                    }
+                }, 1000);
+            }
+        });
+
     }
 
 
     @Override
     protected void onResume() {
-        interval = 10000;
+        interval = 60000;
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, interval);
@@ -267,7 +384,28 @@ public class Dashboard extends AppCompatActivity {
                                     if (location != null) {
                                         lat = String.valueOf(location.getLatitude());
                                         lng = String.valueOf(location.getLongitude());
-                                        Toast.makeText(Dashboard.this, "lat: " + lat + "\nlng: " + lng + toggleLoc.isChecked(), Toast.LENGTH_SHORT).show();
+                                        Task<Void> sendLongitude = reference.child(mobileNumber).child("lat").setValue(lat);
+                                        sendLongitude.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+                                        Task<Void> sendLatitude = reference.child(mobileNumber).child("lng").setValue(lng);
+                                        sendLatitude.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+                                        Task<Void> sendTimestamp = reference.child(mobileNumber).child("timestamp").setValue(ServerValue.TIMESTAMP);
+                                        sendLatitude.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
                                     } else {
                                         Toast.makeText(context, "no location", Toast.LENGTH_SHORT).show();
                                     }
@@ -341,7 +479,6 @@ public class Dashboard extends AppCompatActivity {
             ((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(500);
         }
     }
-
     public void sendOnChannel1(View v) {
         RemoteViews collapsedView = new RemoteViews(getPackageName(),
                 R.layout.notification_collapsed);
@@ -396,6 +533,15 @@ public class Dashboard extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
+            }, 100);
+        } else {
+            return;
+        }
+    }
+    public void askPermissionContacts(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.READ_CONTACTS
             }, 100);
         } else {
             return;

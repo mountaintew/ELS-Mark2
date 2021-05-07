@@ -7,6 +7,7 @@
     android:background="#ebebeb"
     tools:context=".Dashboard">
 
+
     <RelativeLayout
         android:id="@+id/sub_bg"
         android:layout_width="match_parent"
@@ -87,8 +88,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/menu_info"
@@ -100,8 +101,8 @@
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hapticFeedbackEnabled="true"
-                            android:background="@drawable/menu_info"/>
+                            android:background="@drawable/menu_info"
+                            android:hapticFeedbackEnabled="true"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -136,8 +137,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/menu_contacts"
@@ -145,12 +146,12 @@
                         android:elevation="10dp">
 
                         <Button
-                            android:id="@+id/contact"
+                            android:id="@+id/contactbtn"
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hapticFeedbackEnabled="true"
-                            android:background="@drawable/menu_contacts"/>
+                            android:background="@drawable/menu_contacts"
+                            android:hapticFeedbackEnabled="true"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -195,8 +196,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/menu_place"
@@ -207,9 +208,9 @@
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hapticFeedbackEnabled="true"
+                            android:background="@drawable/menu_place"
 
-                            android:background="@drawable/menu_place"/>
+                            android:hapticFeedbackEnabled="true"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -242,8 +243,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/menu_info"
@@ -251,11 +252,12 @@
                         android:elevation="10dp">
 
                         <Button
+                            android:id="@+id/settingsbtn"
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hapticFeedbackEnabled="true"
-                            android:background="@drawable/menu_settings"/>
+                            android:background="@drawable/menu_settings"
+                            android:hapticFeedbackEnabled="true"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -286,74 +288,6 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/notif_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/location_layout"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/productsans"
-            android:gravity="center_vertical"
-            android:text="Notifications"
-            android:textColor="@color/dark"
-            android:textSize="16sp"
-            />
-        <ToggleButton
-            android:id="@+id/toggleNotif"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/toggle_selector"
-            android:checked="true"
-            android:hapticFeedbackEnabled="true"
-            android:textOff=""
-            android:textOn=""
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/location_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/embtn"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/productsans"
-            android:gravity="center_vertical"
-            android:text="Location"
-            android:textColor="@color/dark"
-            android:textSize="16sp" />
-
-        <ToggleButton
-            android:id="@+id/toggleLoc"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/toggle_selector"
-            android:hapticFeedbackEnabled="true"
-            android:textOff=""
-            android:textOn=""
-
-            />
-
-    </LinearLayout>
 
 
 
@@ -426,10 +360,109 @@
 
 
 
+    <LinearLayout
+        android:id="@+id/settingsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/coordbg"
+        android:elevation="15dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
 
 
 
+        <LinearLayout
+            android:id="@+id/notif_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/productsans"
+                android:gravity="center_vertical"
+                android:text="Notifications"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                />
+            <ToggleButton
+                android:id="@+id/toggleNotif"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/toggle_selector"
+                android:checked="true"
+                android:hapticFeedbackEnabled="true"
+                android:textOff=""
+                android:textOn=""
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/location_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/embtn"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/productsans"
+                android:gravity="center_vertical"
+                android:text="Location"
+                android:textColor="@color/dark"
+                android:textSize="16sp" />
+
+            <ToggleButton
+                android:id="@+id/toggleLoc"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/toggle_selector"
+                android:hapticFeedbackEnabled="true"
+                android:textOff=""
+                android:textOn=""
+
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/settingsclosebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/productsans"
+            android:text="Close"
+            android:background="@null"
+            android:textSize="11sp"
+            android:layout_margin="25dp"
+            />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/blurblack"
+        android:visibility="gone"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E6000000"
+        android:focusable="true" />
 
 
 

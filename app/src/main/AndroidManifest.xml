@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".App"
@@ -15,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <activity android:name=".Contacts"></activity>
         <activity
             android:name=".SplashScreen"
             android:noHistory="true">
@@ -31,7 +33,9 @@
         <activity android:name=".SetMobile" />
         <activity android:name=".CheckOtp" />
         <activity android:name=".Register" />
-        <activity android:name=".Dashboard" />
+        <activity
+            android:name=".Dashboard"
+            android:resizeableActivity="false" />
     </application>
 
 </manifest>

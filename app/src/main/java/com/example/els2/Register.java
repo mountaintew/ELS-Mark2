@@ -57,7 +57,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     LinearLayout reg1, reg2, buttons;
     ScrollView scrollView;
     Animation fif, fof, slide_up, slide_down;
-
+    String todo;
     String fn = "", ln = "", bd = "", sx = "", bt = "", we ="", he = "", mc = "", al = "", mn = "", mobileNumber;
     private int mYear, mMonth, mDay;
     int registerstate = 0;
@@ -103,6 +103,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         ar = findViewById(R.id.ar);
         ar.setThreshold(1);
         ar.setAdapter(alleradapter);
+
+        todo = getIntent().getStringExtra("todo");
 
         fn_chk = false;
         ln_chk = false;
@@ -189,6 +191,73 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
+
+
+        if (todo.equals("edit")){
+            int ed_sx;
+            int ed_type;
+
+
+            String[] edit_weight = getIntent().getStringExtra("weight").split(" ");
+            String[] edit_height = getIntent().getStringExtra("height").split(" ");
+
+            String edit_sex = getIntent().getStringExtra("sex");
+            String edit_btype = getIntent().getStringExtra("btype");
+
+            switch (edit_sex){
+                case "Male":
+                    ed_sx = 1;
+                    break;
+                case "Female":
+                    ed_sx = 2;
+                    break;
+                default:
+                    ed_sx = 0;
+            }
+            switch (edit_btype){
+                case "A+":
+                    ed_type = 0;
+                    break;
+                case "A-":
+                    ed_type = 1;
+                    break;
+                case "B+":
+                    ed_type = 2;
+                    break;
+                case "B-":
+                    ed_type = 3;
+                    break;
+                case "AB+":
+                    ed_type = 4;
+                    break;
+                case "AB-":
+                    ed_type = 5;
+                    break;
+                case "O+":
+                    ed_type = 6;
+                    break;
+                case "O-":
+                    ed_type = 7;
+                    break;
+                default:
+                    ed_type = 8;
+            }
+
+            fname.setText(getIntent().getStringExtra("fname"));
+            lname.setText(getIntent().getStringExtra("lname"));
+            bday.setText(getIntent().getStringExtra("bday"));
+            sex.setSelection(ed_sx);
+            bloodtype.setSelection(ed_type);
+            weight.setText(edit_weight[0]);
+            height.setText(edit_height[0]);
+            medcon.setText(getIntent().getStringExtra("medcon"));
+            ar.setText(getIntent().getStringExtra("ar"));
+            mednote.setText(getIntent().getStringExtra("mednote"));
+        }
+
+
+
+
 
     }
     @Override
@@ -451,5 +520,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         return ageS;
     }
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        if (todo.equals("edit")){
+            Intent i=new Intent(Register.this, Dashboard.class);
+            startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
+        }
+
+
+    }
 }

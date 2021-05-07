@@ -97,7 +97,6 @@ public class Dashboard extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
         startService(new Intent(this, BackgroundService.class));
@@ -158,7 +157,6 @@ public class Dashboard extends AppCompatActivity {
         profilepic = findViewById(R.id.profilepic);
 
         sendOnChannel1(name.getRootView());
-        vibrate();
 
         pSans = ResourcesCompat.getFont(context, R.font.productsans);
 
@@ -281,7 +279,12 @@ public class Dashboard extends AppCompatActivity {
         contactbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                askPermissionContacts();
+
+                Intent i=new Intent(Dashboard.this, Contacts.class);
+                startActivity(i);
+                finish();
+                overridePendingTransition(R.anim.show_up,R.anim.show_down);
+
             }
         });
     }
@@ -533,15 +536,6 @@ public class Dashboard extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
-            }, 100);
-        } else {
-            return;
-        }
-    }
-    public void askPermissionContacts(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{
-                    Manifest.permission.READ_CONTACTS
             }, 100);
         } else {
             return;

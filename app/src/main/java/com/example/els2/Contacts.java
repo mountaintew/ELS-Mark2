@@ -8,22 +8,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.UriMatcher;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Contacts extends AppCompatActivity {
+public class Contacts extends AppCompatActivity implements MainAdapter.OnContactListener {
 
     RecyclerView contact_rv;
     ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
@@ -98,7 +96,7 @@ public class Contacts extends AppCompatActivity {
         }
         contact_rv.setLayoutManager(new LinearLayoutManager(this));
 
-        mainAdapter = new MainAdapter(this,arrayList);
+        mainAdapter = new MainAdapter(this,arrayList, this);
 
         contact_rv.setAdapter(mainAdapter);
     }
@@ -120,5 +118,10 @@ public class Contacts extends AppCompatActivity {
         startActivity(i);
         finish();
         overridePendingTransition(R.anim.show_up,R.anim.show_down);
+    }
+
+    @Override
+    public void onContactClick(int pos) {
+        Log.d("Clicked", "onContactClick: clicked" + pos);
     }
 }

@@ -14,10 +14,13 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     Activity activity;
     ArrayList<ContactModel> arrayList;
+    private OnContactListener onContactListener;
 
-    public MainAdapter(Activity activity, ArrayList<ContactModel> arrayList){
+
+    public MainAdapter(Activity activity, ArrayList<ContactModel> arrayList, OnContactListener onContactListener){
         this.activity = activity;
         this.arrayList = arrayList;
+        this.onContactListener = onContactListener;
         notifyDataSetChanged();
     }
 
@@ -28,7 +31,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_contact, parent, false);
         //Return View
-        return new ViewHolder(view);
+        return new ViewHolder(view, onContactListener);
     }
 
     @Override
@@ -49,13 +52,27 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         return arrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName, tvNumber;
+        OnContactListener onContactListener;
 
-        public ViewHolder(@NonNull View itemView) {
+
+        public ViewHolder(@NonNull View itemView, OnContactListener onContactListener) {
             super(itemView);
             tvName = itemView.findViewById(R.id.contact_name);
             tvNumber = itemView.findViewById(R.id.contact_number);
+            this.onContactListener = onContactListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onContactListener.onContactClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnContactListener {
+        void onContactClick(int pos);
     }
 }

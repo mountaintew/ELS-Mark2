@@ -1,6 +1,7 @@
 package com.example.els2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             tvName = itemView.findViewById(R.id.contact_name);
             tvNumber = itemView.findViewById(R.id.contact_number);
             this.onContactListener = onContactListener;
-
             itemView.setOnClickListener(this);
         }
 

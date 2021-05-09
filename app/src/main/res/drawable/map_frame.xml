@@ -17,24 +17,36 @@
                     <size
                         android:width="50dp"
                         android:height="50dp"/>
+                    <solid
+                        android:color="@color/white"/>
 
-                    <gradient
-                        android:startColor="#E1E1E1"
-                        android:endColor="#FFF"
-                        android:angle="45"
-                        />
                     <corners android:radius="50dip"
                         />
                 </shape>
             </item>
 
-            <item
-                android:drawable="@drawable/placeicon"
-                android:gravity="center"
-                android:width="35dp"
-                android:height="35dp"
-                />
+            <item>
+                <shape
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:shape="rectangle"
+                    android:thicknessRatio="55"
+                    >
+                    <padding
+                        android:left="0dp"
+                        android:right="0dp"
+                        android:bottom="0dp"
+                        android:top="0dp"
+                        />
+                    <size
+                        android:width="30dp"
+                        android:height="30dp"/>
+                    <solid
+                        android:color="@android:color/transparent"/>
 
+                    <corners android:radius="50dip"
+                        />
+                </shape>
+            </item>
         </layer-list>
     </item>
 </selector>

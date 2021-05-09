@@ -14,9 +14,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -41,9 +44,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.TimeUnit;
+
 public class CheckOtp extends AppCompatActivity {
 
-    TextView texthelper;
+    TextView texthelper, valid;
     EditText et1, et2, et3, et4 ,et5, et6;
     Button submitbtn;
     boolean etc1 = false, etc2 = false, etc3 = false, etc4 = false, etc5 = false , etc6 = false;
@@ -56,7 +61,7 @@ public class CheckOtp extends AppCompatActivity {
     boolean isConnected;
     String number;
     SharedPreferences.Editor editor;
-
+    int time = 59;
     DatabaseReference accounts = FirebaseDatabase.getInstance().getReference("Users");
     @SuppressLint({"SetTextI18n", "CommitPrefEdits"})
     @Override
@@ -90,7 +95,9 @@ public class CheckOtp extends AppCompatActivity {
         fade_in = AnimationUtils.loadAnimation(context, R.anim.fif_alt);
         fade_out = AnimationUtils.loadAnimation(context, R.anim.fof_alt);
 
+        valid = findViewById(R.id.valid);
 
+        settimer();
         submitbtn = findViewById(R.id.submitbtn);
         progressBar = findViewById(R.id.progressbar);
 
@@ -218,6 +225,7 @@ public class CheckOtp extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.exists()){
+                                                        Log.d("account", "onDataChange: " + "+63" + mobile);
                                                         //has Account
                                                         int age = snapshot.child("+63" + mobile).child("age").getValue(Integer.class);
                                                         String fn = snapshot.child("+63" + mobile).child("firstname").getValue(String.class);
@@ -236,6 +244,7 @@ public class CheckOtp extends AppCompatActivity {
                                                         editor.putBoolean("hasRegistered",true);
                                                         editor.putBoolean("hasLocation",true);
 
+                                                        editor.putString("mobileNumber", "+63" + mobile);
                                                         editor.putString("age", String.valueOf(age));
                                                         editor.putString("firstname", fn);
                                                         editor.putString("lastname", ln);
@@ -251,6 +260,7 @@ public class CheckOtp extends AppCompatActivity {
                                                         editor.apply();
 
                                                         Intent i=new Intent(CheckOtp.this, Dashboard.class);
+                                                        i.putExtra("todo" , "register");
                                                         startActivity(i);
                                                         finish();
                                                         overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
@@ -260,6 +270,7 @@ public class CheckOtp extends AppCompatActivity {
                                                         editor.putString("mobileNumber", "+63" + mobile);
                                                         editor.apply();
                                                         Intent i=new Intent(CheckOtp.this, Register.class);
+                                                        i.putExtra("todo" , "register");
                                                         startActivity(i);
                                                         finish();
                                                         overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
@@ -287,9 +298,6 @@ public class CheckOtp extends AppCompatActivity {
 
             }
         });
-
-
-
     }
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -310,5 +318,49 @@ public class CheckOtp extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void settimer() {
+        new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long remainedSecs = millisUntilFinished / 1000;
+                valid.setTextColor(Color.parseColor("#222222"));
+                valid.setText("0" + (remainedSecs / 60) + ":" + ((remainedSecs % 60) >= 10 ? (remainedSecs % 60) : "0" + (remainedSecs % 60)));
+            }
+            public void onFinish() {
+                valid.setText("Resend");
+                valid.setTextColor(Color.parseColor("#ef5350"));
+                valid.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isConnected){
+                            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                    "+63" + getIntent().getStringExtra("mobile"),
+                                    60,
+                                    TimeUnit.SECONDS,
+                                    CheckOtp.this,
+                                    new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+                                        @Override
+                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                        }
+
+                                        @Override
+                                        public void onVerificationFailed(@NonNull FirebaseException e) {
+                                        }
+
+                                        @Override
+                                        public void onCodeSent(@NonNull String newVerId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                            settimer();
+                                            verId = newVerId;
+                                        }
+                                    }
+                            );
+                        }else {
+                            Toast.makeText(context, R.string.connect, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 }

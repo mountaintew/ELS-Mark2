@@ -7,16 +7,20 @@
     android:background="#ebebeb"
     tools:context=".Dashboard">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/profile_bg"/>
+
 
     <RelativeLayout
         android:id="@+id/sub_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="18dp"
-        android:background="@drawable/bg_prof_sub"
-        android:backgroundTint="@color/white">
+        android:layout_margin="15dp"
+        android:background="@drawable/menu_bg">
 
-
+        <!--PROFILE-->
         <LinearLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -64,289 +68,235 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
+        <!--/PROFILE-->
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/profile_layout"
+            android:layout_above="@id/menu_layout">
+
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/redanim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                app:lottie_autoPlay="false"
+                app:lottie_enableMergePathsForKitKatAndAbove="true"
+                app:lottie_fileName="red.json"
+                app:lottie_loop="true" />
+
+
+            <Button
+                android:id="@+id/embtn"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/embtn"
+                android:fontFamily="@font/bold"
+                android:hapticFeedbackEnabled="true"
+                android:text="Emergency"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
+
+
+        </RelativeLayout>
+
+        <!--MENU BUTTONS-->
         <LinearLayout
+            android:id="@+id/menu_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_layout"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
 
-                <LinearLayout
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:background="@drawable/menu_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp">
 
-                    <RelativeLayout
+                    <Button
+                        android:id="@+id/viewinfo"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/menu_info"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/menu_bg"
+                        android:hapticFeedbackEnabled="true"/>
 
-                        <Button
-                            android:id="@+id/viewinfo"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/menu_info"
-                            android:hapticFeedbackEnabled="true"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/menu_info_icon"/>
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_margin="10dp"
-                            android:elevation="10dp"
-                            android:src="@drawable/menu_info_icon"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/bold"
-                            android:gravity="left"
-                            android:paddingStart="15dp"
-                            android:paddingTop="15dp"
-                            android:text="View\nInfo"
-                            android:textColor="@color/white"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/bold"
+                        android:gravity="left|center"
+                        android:padding="15dp"
+                        android:text="View Info"
+                        android:textColor="@color/red"/>
 
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:background="@drawable/menu_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp">
 
-                    <RelativeLayout
+                    <Button
+                        android:id="@+id/contactbtn"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/menu_contacts"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/menu_bg"
+                        android:hapticFeedbackEnabled="true"/>
 
-                        <Button
-                            android:id="@+id/contactbtn"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/menu_contacts"
-                            android:hapticFeedbackEnabled="true"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/menu_contacts_icon"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center|left"
+                        android:layout_margin="15dp"
+                        android:text="@string/contacts"
+                        android:textColor="@color/red"/>
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_margin="10dp"
-                            android:elevation="10dp"
-                            android:src="@drawable/menu_contacts_icon"/>
+                </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/bold"
-                            android:gravity="left"
-                            android:paddingStart="15dp"
-                            android:paddingTop="15dp"
-                            android:text="Add\nContacts"
-                            android:textColor="@color/white" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
 
 
             </LinearLayout>
+
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
 
-                <LinearLayout
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:background="@drawable/menu_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp">
 
-                    <RelativeLayout
+                    <Button
+                        android:id="@+id/myplacebtn"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/menu_place"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/menu_bg"
+                        android:hapticFeedbackEnabled="true"/>
 
-                        <Button
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/menu_place"
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/menu_place_icon"/>
 
-                            android:hapticFeedbackEnabled="true"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center|left"
+                        android:layout_margin="15dp"
+                        android:text="@string/my_place"
+                        android:textColor="@color/red"/>
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_margin="10dp"
-                            android:elevation="10dp"
-                            android:src="@drawable/menu_place_icon"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/bold"
-                            android:gravity="left"
-                            android:paddingStart="15dp"
-                            android:paddingTop="15dp"
-                            android:text="My\nPlace"
-                            android:textColor="@color/white"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:background="@drawable/menu_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp">
 
-                    <RelativeLayout
+                    <Button
+                        android:id="@+id/settingsbtn"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/menu_info"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/menu_bg"
+                        android:hapticFeedbackEnabled="true"/>
 
-                        <Button
-                            android:id="@+id/settingsbtn"
-                            style="?android:attr/borderlessButtonStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/menu_settings"
-                            android:hapticFeedbackEnabled="true"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="15dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/menu_settings_icon"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center|left"
+                        android:layout_margin="15dp"
+                        android:text="@string/settings"
+                        android:textColor="@color/red"/>
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_margin="10dp"
-                            android:elevation="10dp"
-                            android:src="@drawable/menu_settings_icon"/>
+                </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/bold"
-                            android:gravity="left"
-                            android:paddingStart="15dp"
-                            android:paddingTop="15dp"
-                            android:text="Settings"
-                            android:textColor="@color/white" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
 
 
             </LinearLayout>
+
         </LinearLayout>
+        <!--/MENU BUTTONS-->
 
 
 
-
-
-
-        <Button
-            android:id="@+id/embtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="15dp"
-            android:background="@drawable/embtn"
-            android:fontFamily="@font/bold"
-            android:text="Emergency"
-            android:textAllCaps="false"
-            android:textColor="@color/white"/>
-
-
-
-
-
-    <!--<HorizontalScrollView
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="110dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/bg_prof_sub"
-                android:backgroundTint="@color/metatext"
-                android:layout_height="110dp">
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="110dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/bg_prof_sub"
-                android:backgroundTint="@color/metatext"
-                android:layout_height="110dp">
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="110dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/bg_prof_sub"
-                android:backgroundTint="@color/metatext"
-                android:layout_height="110dp">
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="110dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/bg_prof_sub"
-                android:backgroundTint="@color/metatext"
-                android:layout_height="110dp">
-            </RelativeLayout>
-        </LinearLayout>
-    </HorizontalScrollView>-->
 
 
 
@@ -368,8 +318,8 @@
         android:background="@drawable/coordbg"
         android:elevation="15dp"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
 
@@ -445,11 +395,11 @@
             android:id="@+id/settingsclosebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@null"
             android:fontFamily="@font/productsans"
             android:text="Close"
-            android:background="@null"
             android:textSize="11sp"
-            android:layout_margin="25dp"
             />
 
     </LinearLayout>
@@ -457,12 +407,12 @@
 
     <ImageView
         android:id="@+id/blurblack"
-        android:visibility="gone"
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E6000000"
-        android:focusable="true" />
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
 
 
 

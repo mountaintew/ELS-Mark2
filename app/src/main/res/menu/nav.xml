@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_round_account_circle_24"
+        android:title="@string/my_info"/>
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable/ic_round_group_24"
+        android:title="@string/contacts"/>
+
+    <item
+        android:id="@+id/nav_place"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/my_place"/>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings"/>
+
+</menu>

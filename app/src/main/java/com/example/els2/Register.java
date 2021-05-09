@@ -105,6 +105,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         ar.setAdapter(alleradapter);
 
         todo = getIntent().getStringExtra("todo");
+        if (todo.equals("edit")){
+            mobileNumber = getIntent().getStringExtra("number");
+        }
+
+
+
 
         fn_chk = false;
         ln_chk = false;
@@ -468,7 +474,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     public boolean validatename(String name, String source){
-        String nonumbers = "[a-zA-Z- ',-ñÑ]+";
+        String nonumbers = "[a-zA-Z- '-ñÑ]+";
         String invalid = source.equals("firstname") ? "Invalid Firstname" : "Invalid Lastname";
 
         if (name.equals("")){

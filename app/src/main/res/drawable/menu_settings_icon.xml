@@ -19,8 +19,8 @@
                         android:height="50dp"/>
 
                     <gradient
-                        android:startColor="#FFEB3B"
-                        android:endColor="#EF6C00"
+                        android:startColor="#E1E1E1"
+                        android:endColor="#FFF"
                         android:angle="45"
                         />
                     <corners android:radius="50dip"

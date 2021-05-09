@@ -14,10 +14,10 @@
         android:width="50dp"
         android:height="50dp"/>
     <gradient
-        android:startColor="#4CAF50"
-        android:endColor="#D4E157"
+        android:startColor="#FFF"
+        android:endColor="#EEEEEE"
         android:angle="45"
         />
-    <corners android:radius="30dip"
+    <corners android:radius="20dip"
         />
 </shape>

@@ -18,9 +18,10 @@
                         android:width="50dp"
                         android:height="50dp"/>
 
+
                     <gradient
-                        android:startColor="#80DEEA"
-                        android:endColor="#3F51B5"
+                        android:startColor="#E1E1E1"
+                        android:endColor="#FFF"
                         android:angle="45"
                         />
                     <corners android:radius="50dip"
@@ -29,10 +30,10 @@
             </item>
 
             <item
-                android:drawable="@drawable/ic_baseline_add_circle_24"
+                android:drawable="@drawable/ic_round_group_24"
                 android:gravity="center"
-                android:width="35dp"
-                android:height="35dp"
+                android:width="30dp"
+                android:height="30dp"
                 />
         </layer-list>
     </item>

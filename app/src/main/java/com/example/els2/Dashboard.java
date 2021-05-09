@@ -24,6 +24,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -31,6 +33,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -46,6 +49,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +61,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -64,12 +69,17 @@ import com.google.firebase.storage.UploadTask;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class Dashboard extends AppCompatActivity {
     Context context;
     ToggleButton toggleLoc, toggleNotif;
     TextView name, mobile;
     String fullname, bd, sx, bt, he, we, st, age, mc, ar, mn;
-    Button viewinfo,contactbtn, settingsbtn, settingsclosebtn;
+    Button viewinfo, myplacebtn, contactbtn, settingsbtn, settingsclosebtn;
+    LottieAnimationView redanim;
     ImageView blurblack;
     LinearLayout settingsLayout;
     private ImageView profilepic;
@@ -106,16 +116,18 @@ public class Dashboard extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-
         user = getSharedPreferences("user", MODE_PRIVATE);
         editor = getSharedPreferences("user", MODE_PRIVATE).edit();
         mobileNumber = user.getString("mobileNumber", "");
+
+        redanim = findViewById(R.id.redanim);
 
         //NotificationManager
         notificationManager = NotificationManagerCompat.from(this);
 
         //Button
         viewinfo = findViewById(R.id.viewinfo);
+        myplacebtn = findViewById(R.id.myplacebtn);
         contactbtn = findViewById(R.id.contactbtn);
         settingsbtn = findViewById(R.id.settingsbtn);
         settingsclosebtn = findViewById(R.id.settingsclosebtn);
@@ -151,7 +163,9 @@ public class Dashboard extends AppCompatActivity {
         ar = user.getString("allergy", "n/a");
         mn = user.getString("notes", "n/a");
         st = "Safe";
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
+        Log.d("Token", "onCreate: " + refreshedToken);
         name.setText(fullname);
         mobile.setText(mobileNumber);
         profilepic = findViewById(R.id.profilepic);
@@ -171,6 +185,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (toggleLoc.isChecked()){
+                    redanim.playAnimation();
                     if (toggleNotif.isChecked()){
                         sendOnChannel2(name.getRootView());
                     }
@@ -187,6 +202,7 @@ public class Dashboard extends AppCompatActivity {
                         }
                     });
                 } else {
+                    redanim.pauseAnimation();
                     if (toggleNotif.isChecked()){
                         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.cancel(2);
@@ -238,6 +254,13 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        myplacebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMyPlace();
+            }
+        });
+
         settingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,7 +268,6 @@ public class Dashboard extends AppCompatActivity {
                 settingsLayout.setVisibility(View.VISIBLE);
                 blurblack.startAnimation(fade_in);
                 blurblack.setVisibility(View.VISIBLE);
-
                 settingsbtn.setEnabled(false);
 
             }
@@ -281,12 +303,22 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i=new Intent(Dashboard.this, Contacts.class);
+                i.putExtra("mobilenumber", mobileNumber);
                 startActivity(i);
                 finish();
                 overridePendingTransition(R.anim.show_up,R.anim.show_down);
-
             }
         });
+
+
+
+    }
+
+    private void openMyPlace() {
+        Intent i=new Intent(Dashboard.this, MyPlace.class);
+        startActivity(i);
+        finish();
+        overridePendingTransition(R.anim.show_up,R.anim.show_down);
     }
 
     private void openInfo() {
@@ -345,6 +377,7 @@ public class Dashboard extends AppCompatActivity {
                         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.cancelAll();
                         Intent i=new Intent(Dashboard.this, Register.class);
+                        i.putExtra("number" , mobileNumber);
                         i.putExtra("fname" , user.getString("firstname", ""));
                         i.putExtra("lname" , user.getString("lastname", ""));
                         i.putExtra("bday" , bd);
@@ -369,7 +402,7 @@ public class Dashboard extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        interval = 60000;
+        interval = 10000;
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, interval);
@@ -387,6 +420,17 @@ public class Dashboard extends AppCompatActivity {
                                     if (location != null) {
                                         lat = String.valueOf(location.getLatitude());
                                         lng = String.valueOf(location.getLongitude());
+
+                                        Geocoder geocoder = new Geocoder(Dashboard.this, Locale.getDefault());
+                                        try {
+                                            List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lng), 1);
+                                            String cityName = addresses.get(0).getLocality();
+                                            Toast.makeText(context, cityName, Toast.LENGTH_SHORT).show();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+
+
                                         Task<Void> sendLongitude = reference.child(mobileNumber).child("lat").setValue(lat);
                                         sendLongitude.addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:gravity="center"
+    android:background="#212121"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
+
+
+        <ImageView
+            android:id="@+id/notif_profile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circle"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/notif_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="Lester Arana"
+                android:textColor="@color/light"
+                android:textSize="26sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:textColor="#FFD54F"
+                android:text="Emergency Contact:"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/notif_cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:textColor="@color/light"
+                android:textSize="12sp"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/bdaylbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/bday"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_bday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/sexlbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/sex"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/btypelbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="Age"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/heightlbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/height"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/weightlbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/weight"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/statelbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/state"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/medcon"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/notif_medcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/ar"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_ar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:text="@string/mednote"
+                android:textColor="@color/metatext"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/notif_mednote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans"
+                android:gravity="left"
+                android:paddingStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:text=""
+                android:textColor="@color/light"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

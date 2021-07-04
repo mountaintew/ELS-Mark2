@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/em_bg"
+    android:id="@+id/em_layout_alt"
+    android:theme="@style/Theme.ELS2">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="left|center"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/emtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency/Report: "
+                    android:fontFamily="@font/productsans"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/req"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/productsans"
+                    android:gravity="right"
+                    android:text="Required"
+                    android:textColor="#80222222"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+
+                android:layout_marginRight="15dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/manualemd"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:fontFamily="@font/productsans"
+                    android:hint="Emergency"
+                    android:inputType="textCapWords"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+    <EditText
+        android:layout_below="@+id/layout"
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bordered"
+        android:fontFamily="@font/productsans"
+        android:gravity="start|top"
+        android:hint="@string/message_optional"
+        android:inputType="textMultiLine|textLongMessage"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="15dp"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/helpertext"
+        android:layout_below="@id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send a message to your barangay response team"
+        android:fontFamily="@font/productsans"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:textSize="11sp"/>
+
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/helpertext"
+        android:layout_marginLeft="8dp"
+        android:fontFamily="@font/productsans"
+        android:text="Set as default"/>
+
+
+    <Button
+        android:id="@+id/sendbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb"
+        android:layout_marginTop="-7dp"
+        android:background="@drawable/ripple_sendbtn"
+        android:fontFamily="@font/productsans"
+        android:text="Send"
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+
+</RelativeLayout>

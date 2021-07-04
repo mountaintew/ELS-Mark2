@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E4E4E4"
+    tools:context=".Survey">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="@color/green" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Select your age category."
+                        android:textColor="@color/dark"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="50dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Piliin ang kategorya ng iyong edad."
+                        android:textColor="@color/metatext"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/ac14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/ripple_borderedbtn"
+                        android:fontFamily="@font/medium"
+                        android:text="14 and below"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/ac15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/ripple_borderedbtn"
+                        android:fontFamily="@font/medium"
+                        android:text="15 to 24 years old"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/ac25"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/ripple_borderedbtn"
+                        android:fontFamily="@font/medium"
+                        android:text="25 to 54 years old"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/ac55"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/ripple_borderedbtn"
+                        android:fontFamily="@font/medium"
+                        android:text="55 to 64 years old"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/ac65"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/ripple_borderedbtn"
+                        android:fontFamily="@font/medium"
+                        android:text="65 and above"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Have you been vaccinated?"
+                        android:textColor="@color/dark"
+                        android:textSize="22sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/q2yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:fontFamily="@font/productsans"
+                            android:text="Yes"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:id="@+id/q2no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:elevation="3dp"
+                            android:fontFamily="@font/productsans"
+                            android:text="No"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question_sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="How many doses have you taken?"
+                        android:textColor="@color/dark"
+                        android:textSize="18sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="40dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_min"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="15dp"
+                            android:background="@null"
+                            android:fontFamily="@font/bold"
+                            android:text="-"
+                            android:textColor="@color/dark"
+                            android:textSize="30sp"/>
+
+                        <TextView
+                            android:id="@+id/doses"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/bordered"
+                            android:fontFamily="@font/productsans"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textSize="25sp"/>
+
+                        <Button
+                            android:id="@+id/btn_add"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="13dp"
+                            android:background="@null"
+                            android:fontFamily="@font/medium"
+                            android:text="+"
+                            android:textColor="@color/dark"
+                            android:textSize="30sp"/>
+
+
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/qsub_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/ripple_cbtn_disabled"
+                        android:enabled="false"
+                        android:fontFamily="@font/productsans"
+                        android:text="Continue"
+                        android:textAllCaps="false"
+                        android:textColor="#FFF"/>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question3a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Are you a frontliner?"
+                        android:textColor="@color/dark"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="First Responders, Food or Grocery Workers, Essential Services, Volunteers, Sanitation Workers, etc..."
+                        android:textColor="@color/metatext"
+                        android:textSize="11sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/q3yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:text="Yes"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:id="@+id/q3no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:elevation="3dp"
+                            android:text="No"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question3b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Please check any of the following you've experienced these past few days."
+                        android:textColor="@color/dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Mangyaring tsekan ang alinman sa mga sumusunod na naranasan mo nitong mga nakaraang araw."
+                        android:textColor="@color/metatext"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Fever" />
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Cold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Headache" />
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Dry Cough" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Runny Nose" />
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Shortness of Breath" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Diarrhea" />
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Loss of Taste" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="40dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="Others (specify)" />
+
+                        <CheckBox
+                            android:id="@+id/q3b_cb10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/regular"
+                            android:text="None" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/q3b_contbtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/ripple_cbtn_disabled"
+                        android:enabled="false"
+                        android:fontFamily="@font/productsans"
+                        android:text="Continue"
+                        android:textAllCaps="false"
+                        android:textColor="#FFF"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Do you have relatives living with you who had COVID-19?"
+                        android:textColor="@color/dark"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Mayroon ka bang kamag-anak na kasama ninyo sa bahay na nagkaroon ng COVID-19?"
+                        android:textColor="@color/metatext"
+                        android:textSize="11sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/q4yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:fontFamily="@font/productsans"
+                            android:text="Yes"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/q4no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:elevation="3dp"
+                            android:fontFamily="@font/productsans"
+                            android:text="No, I don't have"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/question5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Are you willing to be vaccinated when it is available in your area?"
+                        android:textColor="@color/dark"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Pumapayag ka bang mabakunahan kapag mayroon na nito sa inyong lugar?"
+                        android:textColor="@color/metatext"
+                        android:textSize="11sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/q5yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:fontFamily="@font/productsans"
+                            android:text="Yes"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/q5no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ripple_circlebtn"
+                            android:elevation="3dp"
+                            android:fontFamily="@font/productsans"
+                            android:text="No"
+                            android:textAllCaps="false"
+                            android:textColor="@color/green"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/thanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/comp_anim"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        app:lottie_autoPlay="false"
+                        app:lottie_enableMergePathsForKitKatAndAbove="true"
+                        app:lottie_fileName="safe.json"
+                        app:lottie_loop="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="40dp"
+                        android:fontFamily="@font/productsans"
+                        android:gravity="center"
+                        android:text="Survey Completed"
+                        android:textColor="@color/green"
+                        android:textSize="26sp"
+                        />
+
+                    <Button
+                        android:id="@+id/gtd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_cbtn_enabled"
+                        android:backgroundTint="@color/light"
+                        android:fontFamily="@font/productsans"
+                        android:text="Go to Dashboard"
+                        android:textAllCaps="false"
+                        android:textColor="@color/dark"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -16,7 +16,7 @@
         android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="25dp">
 
 
         <LinearLayout

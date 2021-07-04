@@ -2,10 +2,10 @@ package com.example.els2;
 
 public class UserHelper {
     String firstname, lastname, birthdate, sex, bloodtype, weight, height, conditions, allergies, mednotes, number, state;
-    boolean toggled;
+    boolean toggled, surveytaken;
     int age;
 
-    public UserHelper(int age, String firstname, String lastname, String birthdate, String sex, String bloodtype, String weight, String height, String conditions, String allergies, String mednotes, String number, String state, boolean toggled) {
+    public UserHelper(int age, String firstname, String lastname, String birthdate, String sex, String bloodtype, String weight, String height, String conditions, String allergies, String mednotes, String number, String state, boolean toggled, boolean surveytaken) {
         this.age = age;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -20,6 +20,15 @@ public class UserHelper {
         this.number = number;
         this.state = state;
         this.toggled = toggled;
+        this.surveytaken = surveytaken;
+    }
+
+    public boolean isSurveytaken() {
+        return surveytaken;
+    }
+
+    public void setSurveytaken(boolean surveytaken) {
+        this.surveytaken = surveytaken;
     }
 
     public UserHelper() {

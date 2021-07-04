@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main">#fcbc22</color>
-    <color name="dark">#222222</color>
+    <color name="dark">#212121</color>
+    <color name="light">#fafafa</color>
     <color name="red">#ef5350</color>
     <color name="green">#43a047</color>
     <color name="metatext">#8F8F8F</color>

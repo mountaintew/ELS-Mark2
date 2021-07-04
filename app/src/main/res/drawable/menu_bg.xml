@@ -13,10 +13,8 @@
     <size
         android:width="50dp"
         android:height="50dp"/>
-    <gradient
-        android:startColor="#FFF"
-        android:endColor="#EEEEEE"
-        android:angle="45"
+    <solid
+        android:color="#BDBDBD"
         />
     <corners android:radius="20dip"
         />

@@ -11,7 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -30,6 +32,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,9 +52,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     AutoCompleteTextView medcon, ar;
     Context context;
     Button nextbtn, backbtn;
-
+    ProgressBar loading;
     LottieAnimationView check;
-    TextView title, fname_lbl, lname_lbl, bday_lbl;
+    TextView title, fname_lbl, lname_lbl, bday_lbl, sex_lbl, btype_lbl, rd1, rd2, rl1, rl2;
+    TextView weight_lbl, height_lbl, medcon_lbl, ar_lbl, mednote_lbl;
     EditText fname, lname, bday, weight, height, mednote;
     String age;
     Spinner sex, bloodtype, weight_unit, height_unit;
@@ -66,6 +71,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     SharedPreferences.Editor editor;
     SharedPreferences user;
     DatePickerDialog datePickerDialog;
+    boolean isDarkTheme = false;
+    RelativeLayout register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,12 +116,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             mobileNumber = getIntent().getStringExtra("number");
         }
 
-
-
-
         fn_chk = false;
         ln_chk = false;
 
+        register = findViewById(R.id.register);
         //EditText
         fname = findViewById(R.id.fnameEt);
         lname = findViewById(R.id.lnameEt);
@@ -131,9 +136,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         //Labels
         title = findViewById(R.id.title);
+        rd1 = findViewById(R.id.rd1);
+        rd2 = findViewById(R.id.rd2);
+        rl1 = findViewById(R.id.rl1);
+        rl2 = findViewById(R.id.rl2);
         fname_lbl = findViewById(R.id.fname_lbl);
         lname_lbl = findViewById(R.id.lname_lbl);
         bday_lbl = findViewById(R.id.bday_lbl);
+        sex_lbl = findViewById(R.id.sex_lbl);
+        btype_lbl = findViewById(R.id.btype_lbl);
+        //TextView weight_lbl, height_lbl, medcon_lbl, ar_lbl, mednote_lbl;
+        weight_lbl = findViewById(R.id.weight_lbl);
+        height_lbl = findViewById(R.id.height_lbl);
+        medcon_lbl = findViewById(R.id.medcon_lbl);
+        ar_lbl = findViewById(R.id.ar_lbl);
+        mednote_lbl = findViewById(R.id.mednote_lbl);
+
+
         age = "";
 
         //Buttons
@@ -163,6 +182,52 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         backbtn.setOnClickListener(this);
         bday.setText("");
 
+        //Progress Bar
+        loading = findViewById(R.id.loading);
+
+        String displaymode = user.getString("displaymode", "");
+        int nightModeFlags =
+                getBaseContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                //night mode
+                if (displaymode.equals("light")){
+                    lightmode();
+                    editor.putString("displaymode", "light");
+                    editor.apply();
+                }else if (displaymode.equals("dark")){
+                    darkmode();
+                    editor.putString("displaymode", "dark");
+                    editor.apply();
+                }else{
+                    darkmode();
+                }
+
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+            case Configuration.UI_MODE_NIGHT_NO:
+                //light mode
+                if (displaymode.equals("light")){
+                    lightmode();
+                    editor.putString("displaymode", "light");
+                    editor.apply();
+                }else if (displaymode.equals("dark")){
+                    darkmode();
+                    editor.putString("displaymode", "dark");
+                    editor.apply();
+                }else{
+                    lightmode();
+                }
+                break;
+        }
+
+
+
+
+
+
+
         fname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -171,8 +236,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fname_lbl.setTextColor(Color.parseColor("#222222"));
-                fname.setBackgroundResource(R.drawable.bordered);
+                if (isDarkTheme){
+                    fname.setBackgroundResource(R.drawable.dm_bordered);
+                    fname_lbl.setTextColor(Color.parseColor("#fafafa"));
+                }else {
+                    fname.setBackgroundResource(R.drawable.bordered);
+                    fname_lbl.setTextColor(Color.parseColor("#222222"));
+                }
             }
 
             @Override
@@ -188,8 +258,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                lname.setBackgroundResource(R.drawable.bordered);
-                lname_lbl.setTextColor(Color.parseColor("#222222"));
+                if (isDarkTheme){
+                    lname.setBackgroundResource(R.drawable.dm_bordered);
+                    lname_lbl.setTextColor(Color.parseColor("#fafafa"));
+                }else {
+                    lname.setBackgroundResource(R.drawable.bordered);
+                    lname_lbl.setTextColor(Color.parseColor("#222222"));
+                }
             }
 
             @Override
@@ -197,12 +272,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
-
-
         if (todo.equals("edit")){
             int ed_sx;
             int ed_type;
-
+            int ed_he;
 
             String[] edit_weight = getIntent().getStringExtra("weight").split(" ");
             String[] edit_height = getIntent().getStringExtra("height").split(" ");
@@ -249,6 +322,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     ed_type = 8;
             }
 
+
+            if (edit_weight.length == 0){
+
+            } else {
+                if (edit_weight[0].equals("") || edit_height[0].equals("")){
+
+                }else{
+                    weight_unit.setSelection(edit_weight[1].equals("kg") ?  0 : 1);
+                    switch (edit_height[1]){
+                        case "m":
+                            ed_he = 1;
+                            break;
+                        case "ft":
+                            ed_he = 2;
+                            break;
+                        case "in":
+                            ed_he = 3;
+                            break;
+                        default:
+                            ed_he = 0;
+                    }
+                    height_unit.setSelection(ed_he);
+                }
+
+            }
+
+
             fname.setText(getIntent().getStringExtra("fname"));
             lname.setText(getIntent().getStringExtra("lname"));
             bday.setText(getIntent().getStringExtra("bday"));
@@ -260,12 +360,163 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             ar.setText(getIntent().getStringExtra("ar"));
             mednote.setText(getIntent().getStringExtra("mednote"));
         }
-
-
-
-
-
     }
+
+    private void lightmode() {
+        setTheme(R.style.LightTheme);
+        getWindow().setStatusBarColor(Color.parseColor("#fafafa"));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        isDarkTheme = false;
+        register.setBackgroundColor(Color.parseColor("#fafafa"));
+        title.setTextColor(Color.parseColor("#222222"));
+        rd1.setTextColor(Color.parseColor("#222222"));
+        rd2.setTextColor(Color.parseColor("#222222"));
+
+        rl1.setTextColor(Color.parseColor("#222222"));
+        rl2.setTextColor(Color.parseColor("#222222"));
+
+        fname_lbl.setTextColor(Color.parseColor("#222222"));
+        lname_lbl.setTextColor(Color.parseColor("#222222"));
+        bday_lbl.setTextColor(Color.parseColor("#222222"));
+        sex_lbl.setTextColor(Color.parseColor("#222222"));
+        btype_lbl.setTextColor(Color.parseColor("#222222"));
+
+        bday_lbl.setTextColor(Color.parseColor("#222222"));
+        bday_lbl.setTextColor(Color.parseColor("#222222"));
+        bday_lbl.setTextColor(Color.parseColor("#222222"));
+
+        fname.setBackgroundResource(R.drawable.bordered);
+        fname.setTextColor(Color.parseColor("#222222"));
+
+        lname.setBackgroundResource(R.drawable.bordered);
+        lname.setTextColor(Color.parseColor("#222222"));
+
+        bday.setBackgroundResource(R.drawable.bordered);
+        bday.setTextColor(Color.parseColor("#222222"));
+
+
+        sex.setBackgroundResource(R.drawable.spinner);
+        sex.setPopupBackgroundResource(R.drawable.spinnerbg);
+
+        bloodtype.setBackgroundResource(R.drawable.bordered);
+        bloodtype.setPopupBackgroundResource(R.drawable.spinnerbg);
+
+        height_lbl.setTextColor(Color.parseColor("#222222"));
+        weight_lbl.setTextColor(Color.parseColor("#222222"));
+        medcon_lbl.setTextColor(Color.parseColor("#222222"));
+        ar_lbl.setTextColor(Color.parseColor("#222222"));
+        mednote_lbl.setTextColor(Color.parseColor("#222222"));
+
+        weight.setBackgroundResource(R.drawable.bordered);
+        weight.setTextColor(Color.parseColor("#222222"));
+        weight_unit.setPopupBackgroundResource(R.drawable.bordered);
+
+        height.setBackgroundResource(R.drawable.bordered);
+        height.setTextColor(Color.parseColor("#222222"));
+        height_unit.setPopupBackgroundResource(R.drawable.bordered);
+
+
+        medcon.setBackgroundResource(R.drawable.bordered);
+        medcon.setTextColor(Color.parseColor("#222222"));
+
+        ar.setBackgroundResource(R.drawable.bordered);
+        ar.setTextColor(Color.parseColor("#222222"));
+
+        medcon.setBackgroundResource(R.drawable.bordered);
+        medcon.setTextColor(Color.parseColor("#222222"));
+
+        mednote.setBackgroundResource(R.drawable.bordered);
+        mednote.setTextColor(Color.parseColor("#222222"));
+
+
+        nextbtn.setTextColor(Color.parseColor("#222222"));
+        nextbtn.setBackgroundColor(Color.parseColor("#fafafa"));
+
+
+        backbtn.setTextColor(getColor(R.color.metatext));
+        backbtn.setBackgroundColor(Color.parseColor("#fafafa"));
+    }
+
+    private void darkmode() {
+        setTheme(R.style.DarkTheme);
+        getWindow().setStatusBarColor(Color.parseColor("#222222"));
+        isDarkTheme = true;
+        register.setBackgroundColor(Color.parseColor("#222222"));
+        title.setTextColor(Color.parseColor("#fcbc20"));
+        rd1.setTextColor(Color.parseColor("#fafafa"));
+        rd2.setTextColor(Color.parseColor("#fafafa"));
+
+        rl1.setTextColor(Color.parseColor("#fcbc20"));
+        rl2.setTextColor(Color.parseColor("#fcbc20"));
+
+        fname_lbl.setTextColor(Color.parseColor("#fafafa"));
+        lname_lbl.setTextColor(Color.parseColor("#fafafa"));
+        bday_lbl.setTextColor(Color.parseColor("#fafafa"));
+        sex_lbl.setTextColor(Color.parseColor("#fafafa"));
+        btype_lbl.setTextColor(Color.parseColor("#fafafa"));
+
+
+        fname.setBackgroundResource(R.drawable.dm_bordered);
+        fname.setTextColor(Color.parseColor("#fafafa"));
+        fname.setHintTextColor(getColor(R.color.metatext));
+
+        lname.setBackgroundResource(R.drawable.dm_bordered);
+        lname.setTextColor(Color.parseColor("#fafafa"));
+        lname.setHintTextColor(getColor(R.color.metatext));
+
+
+        bday.setBackgroundResource(R.drawable.dm_bordered);
+        bday.setTextColor(Color.parseColor("#fafafa"));
+        bday.setHintTextColor(getColor(R.color.metatext));
+
+
+        sex.setBackgroundResource(R.drawable.dm_spinner);
+        sex.setPopupBackgroundResource(R.drawable.dm_spinnerbg);
+
+        bloodtype.setBackgroundResource(R.drawable.dm_bordered);
+        bloodtype.setPopupBackgroundResource(R.drawable.dm_spinnerbg);
+
+        height_lbl.setTextColor(Color.parseColor("#fafafa"));
+        weight_lbl.setTextColor(Color.parseColor("#fafafa"));
+        medcon_lbl.setTextColor(Color.parseColor("#fafafa"));
+        ar_lbl.setTextColor(Color.parseColor("#fafafa"));
+        mednote_lbl.setTextColor(Color.parseColor("#fafafa"));
+
+        weight.setBackgroundResource(R.drawable.dm_bordered);
+        weight.setTextColor(Color.parseColor("#fafafa"));
+        weight_unit.setPopupBackgroundResource(R.drawable.dm_spinnerbg);
+        weight_unit.setBackgroundResource(R.drawable.dm_spinner);
+        weight.setHintTextColor(getColor(R.color.metatext));
+
+        height.setBackgroundResource(R.drawable.dm_bordered);
+        height.setTextColor(Color.parseColor("#fafafa"));
+        height_unit.setBackgroundResource(R.drawable.dm_spinner);
+        height_unit.setPopupBackgroundResource(R.drawable.dm_spinnerbg);
+        height.setHintTextColor(getColor(R.color.metatext));
+
+        medcon.setBackgroundResource(R.drawable.dm_bordered);
+        medcon.setTextColor(Color.parseColor("#fafafa"));
+        medcon.setHintTextColor(getColor(R.color.metatext));
+
+        ar.setBackgroundResource(R.drawable.dm_bordered);
+        ar.setTextColor(Color.parseColor("#fafafa"));
+        ar.setHintTextColor(getColor(R.color.metatext));
+
+        medcon.setBackgroundResource(R.drawable.dm_bordered);
+        medcon.setTextColor(Color.parseColor("#fafafa"));
+        medcon.setHintTextColor(getColor(R.color.metatext));
+
+        mednote.setBackgroundResource(R.drawable.dm_bordered);
+        mednote.setTextColor(Color.parseColor("#fafafa"));
+        mednote.setHintTextColor(getColor(R.color.metatext));
+
+        nextbtn.setTextColor(Color.parseColor("#fcbc20"));
+        nextbtn.setBackgroundColor(Color.parseColor("#222222"));
+
+        backbtn.setTextColor(getColor(R.color.metatext));
+        backbtn.setBackgroundColor(Color.parseColor("#222222"));
+    }
+
     @Override
     public void onClick(View view) {
         if (view == bday) {
@@ -273,8 +524,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
-            bday.setBackgroundResource(R.drawable.bordered);
-            bday_lbl.setTextColor(Color.parseColor("#222222"));
+
+
+
+
+            if (isDarkTheme){
+                bday.setBackgroundResource(R.drawable.dm_bordered);
+                bday_lbl.setTextColor(Color.parseColor("#fafafa"));
+            }else {
+                bday.setBackgroundResource(R.drawable.bordered);
+                bday_lbl.setTextColor(Color.parseColor("#222222"));
+            }
 
             datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
@@ -365,7 +625,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             nextbtn.setText("Submit");
                         }
                     }
-
                 }
             } else if (registerstate == 1){
                 //fn, ln, bd, sx, bt, we, he, mc, al, mn;
@@ -416,30 +675,40 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
                 //fn, ln, bd, sx, bt, we, he, mc, al, mn;
                 // firstname,  lastname,  birthdate,  sex,  bloodtype,  weight,  height,  conditions,  allergies,  mednotes,  number,  state, boolean toggled
-                UserHelper userHelper = new UserHelper(ag, fn, ln, bd, sx, bt, we, he, mc, al, mn, mobileNumber, "Safe", false);
+                UserHelper userHelper = new UserHelper(ag, fn, ln, bd, sx, bt, we, he, mc, al, mn, mobileNumber, "Safe", false, getIntent().getBooleanExtra("hasSurvey", false));
+
+                scrollView.startAnimation(fof);
+                scrollView.setVisibility(View.GONE);
+                buttons.startAnimation(fof);
+                buttons.setVisibility(View.GONE);
+                loading.setVisibility(View.VISIBLE);
 
                 //SENDS THE DATA TO THE DATABASE IF CONNECTED TO THE INTERNET ELSE STORE THE DATA IN TO LOCAL STORAGE
                 if (isConnected){
-                    databaseReference.child(mobileNumber).setValue(userHelper, new DatabaseReference.CompletionListener() {
+                    databaseReference.child(mobileNumber + "/info").setValue(userHelper, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                            scrollView.startAnimation(fof);
-                            scrollView.setVisibility(View.GONE);
-                            buttons.startAnimation(fof);
-                            buttons.setVisibility(View.GONE);
-                            check.startAnimation(fif);
-                            check.setVisibility(View.VISIBLE);
-                            check.setSpeed((float) 2.0);
-                            check.playAnimation();;
-                            new Handler().postDelayed(new Runnable() {
+                            
+                            databaseReference.child(mobileNumber + "/info").child("fullname").setValue(fn + " " + ln, new DatabaseReference.CompletionListener() {
                                 @Override
-                                public void run() {
-                                    Intent i=new Intent(Register.this, Dashboard.class);
-                                    startActivity(i);
-                                    finish();
-                                    overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                    loading.startAnimation(fof);
+                                    loading.setVisibility(View.GONE);
+                                    check.startAnimation(fif);
+                                    check.setVisibility(View.VISIBLE);
+                                    check.setSpeed((float) 2.0);
+                                    check.playAnimation();;
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent i=new Intent(Register.this, Dashboard.class);
+                                            startActivity(i);
+                                            finish();
+                                            overridePendingTransition(R.anim.fade_in_slow,R.anim.fade_out_slow);
+                                        }
+                                    }, 1900);
                                 }
-                            }, 1900);
+                            });
                         }
                     });
                 }

@@ -5,25 +5,36 @@
     android:id="@+id/register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".Register">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:lottie_autoPlay="false"
-        android:scaleY="0.2"
         android:scaleX="0.2"
+        android:scaleY="0.2"
         android:visibility="gone"
+        app:lottie_autoPlay="false"
         app:lottie_enableMergePathsForKitKatAndAbove="true"
         app:lottie_fileName="check.json"
         app:lottie_loop="false" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/main"
+        android:visibility="gone"
+        />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_above="@id/buttons">
 
 
@@ -38,9 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="1dp"
+            android:orientation="vertical"
             android:paddingTop="45dp"
-            android:paddingBottom="45dp"
-            android:orientation="vertical">
+            android:paddingBottom="45dp">
 
         <TextView
             android:id="@+id/title"
@@ -55,6 +66,7 @@
             android:textSize="35sp" />
 
         <TextView
+            android:id="@+id/rd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -66,6 +78,7 @@
             android:textStyle="normal"
             />
         <TextView
+            android:id="@+id/rd2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -79,11 +92,6 @@
 
         </LinearLayout>
 
-
-
-
-
-
         <LinearLayout
             android:id="@+id/reg1"
             android:layout_width="match_parent"
@@ -95,33 +103,34 @@
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/fname_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="45dp"
                     android:layout_marginTop="45dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="45dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/productsans"
                     android:text="@string/firstname"
                     android:textColor="@color/black"
                     />
                 <TextView
+                    android:id="@+id/rl1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="45dp"
                     android:layout_marginTop="45dp"
-                    android:textSize="11sp"
-                    android:layout_weight="1"
-                    android:gravity="right|bottom"
                     android:layout_marginEnd="45dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/productsans"
+                    android:gravity="right|bottom"
                     android:text="Required"
                     android:textColor="@color/black"
+                    android:textSize="11sp"
                     />
 
             </LinearLayout>
@@ -150,32 +159,33 @@
 
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/lname_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="45dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="45dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/productsans"
                     android:text="@string/lastname"
                     android:textColor="@color/black"
                     />
                 <TextView
+                    android:id="@+id/rl2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="45dp"
-                    android:textSize="11sp"
-                    android:layout_weight="1"
-                    android:gravity="right|bottom"
                     android:layout_marginEnd="45dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/productsans"
+                    android:gravity="right|bottom"
                     android:text="Required"
                     android:textColor="@color/black"
+                    android:textSize="11sp"
                     />
 
             </LinearLayout>
@@ -224,13 +234,14 @@
                 android:fontFamily="@font/bold"
                 android:hint="@string/bdayformat"
                 android:inputType="date"
-                android:text=""
                 android:maxLength="10"
                 android:paddingStart="15dp"
+                android:text=""
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
                 android:textSize="14sp" />
             <TextView
+                android:id="@+id/sex_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -252,6 +263,7 @@
                 android:entries="@array/sex_entries" />
 
             <TextView
+                android:id="@+id/btype_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -280,11 +292,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
             <TextView
+                android:id="@+id/weight_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -311,8 +324,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/bordered"
                     android:hint="Weight"
-                    android:paddingStart="15dp"
                     android:inputType="numberDecimal"
+                    android:paddingStart="15dp"
                     android:paddingEnd="15dp"/>
 
                 <Spinner
@@ -326,6 +339,7 @@
 
             </LinearLayout>
             <TextView
+                android:id="@+id/height_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -351,8 +365,8 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/bordered"
-                    android:inputType="numberDecimal"
                     android:hint="Height"
+                    android:inputType="numberDecimal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"/>
 
@@ -371,6 +385,7 @@
 
 
             <TextView
+                android:id="@+id/medcon_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -397,6 +412,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/ar_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -424,6 +440,7 @@
                 android:textCursorDrawable="@null"
                 android:textSize="14sp" />
             <TextView
+                android:id="@+id/mednote_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -449,8 +466,8 @@
                 android:hint="Medical Notes"
                 android:inputType="textMultiLine|textLongMessage"
                 android:paddingStart="15dp"
-                android:paddingEnd="15dp"
                 android:paddingTop="15dp"
+                android:paddingEnd="15dp"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
                 android:textSize="14sp" />

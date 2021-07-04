@@ -9,6 +9,7 @@
     android:paddingLeft="25dp"
     android:focusable="true"
     android:paddingRight="25dp"
+
     android:id="@+id/contactlayout"
     tools:context=".Contacts">
 
@@ -122,20 +123,45 @@
         android:id="@+id/submitcontact"
         android:layout_width="match_parent"
         android:layout_margin="15dp"
-        android:text="@string/titlecontact"
+        android:text="Add Contact"
         android:textAllCaps="false"
         android:fontFamily="@font/productsans"
         android:hapticFeedbackEnabled="true"
         android:elevation="5dp"
         android:textColor="@color/white"
-        android:background="@drawable/menu_contacts"
+        android:background="@drawable/allowbuttons_done"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/viewcontacts"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="My Emergency Contact"
+        android:paddingStart="55dp"
+        android:paddingEnd="55dp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/productsans"
+        android:hapticFeedbackEnabled="true"
+        android:elevation="5dp"
+        android:textColor="@color/main"
+        android:background="@null"
         android:layout_height="wrap_content"/>
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:id="@+id/contact_rv"
-        tools:listitem="@layout/item_contact"
-        android:layout_height="match_parent"/>
+        app:cardElevation="5dp"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/contact_rv"
+            tools:listitem="@layout/item_contact"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>

@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/permissions"
+    android:background="#222"
     tools:context=".Permissions">
 
 
@@ -16,18 +18,28 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/anim1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            app:lottie_autoPlay="true"
-            app:lottie_enableMergePathsForKitKatAndAbove="true"
-            app:lottie_fileName="locationaccess.json"
-            app:lottie_loop="false" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/anim1"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                app:lottie_autoPlay="true"
+                app:lottie_enableMergePathsForKitKatAndAbove="true"
+                app:lottie_fileName="locationaccess.json"
+                app:lottie_loop="false" />
+        </RelativeLayout>
+
 
         <TextView
+            android:id="@+id/locationtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/productsans"
@@ -38,6 +50,7 @@
             android:translationY="-50dp"/>
 
         <TextView
+            android:id="@+id/locationdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -83,6 +96,7 @@
             app:lottie_loop="false" />
 
         <TextView
+            android:id="@+id/notiftitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/productsans"
@@ -93,6 +107,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/notifdetails1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -105,6 +120,7 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/notifdetails2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -117,6 +133,7 @@
             android:textColor="#000"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/notifdetails3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -128,6 +145,7 @@
             android:textColor="#000"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/notifdetails4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -139,6 +157,7 @@
             android:textColor="#000"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/notifdetails5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -151,6 +170,7 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/notifdetails6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"

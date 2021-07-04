@@ -8,44 +8,112 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/errormock"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
+            app:lottie_fileName="mockerror.json"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleX="0.3"
-            android:scaleY="0.3"
-            android:src="@drawable/logo" />
+            android:gravity="center"
+            android:textSize="26sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/green"
+            android:text="Sorry "/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/dark"
+            android:text="@string/detected"/>
+
+        <Button
+            android:id="@+id/closeapp"
+            android:layout_width="match_parent"
+            android:background="@drawable/allowbuttons_done"
+            android:layout_margin="45dp"
+            android:fontFamily="@font/productsans"
+            android:text="Close App"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="133dp"
-        android:layout_height="15dp"
-        android:layout_above="@id/version"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="true"
-        android:indeterminateDuration="3000"
-        android:indeterminateTint="#F2C900"
-        android:max="100"/>
 
-    <TextView
-        android:id="@+id/version"
+
+    <RelativeLayout
+        android:id="@+id/mainLo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/productsans"
-        android:gravity="center"
-        android:text="@string/version"/>
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/logo" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Emergency Location System"
+                android:fontFamily="@font/productsans"
+                android:visibility="gone"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_above="@id/version"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="true"
+            app:lottie_enableMergePathsForKitKatAndAbove="true"
+            app:lottie_fileName="ss_load.json"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/productsans"
+            android:gravity="center"
+            android:text="@string/version"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

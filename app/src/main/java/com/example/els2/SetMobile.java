@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,6 +20,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -35,6 +38,11 @@ public class SetMobile extends AppCompatActivity {
     ProgressBar progressbar;
     String mobile_input;
     Context context;
+
+    RelativeLayout setmobile;
+    TextView enterinfo;
+    EditText localnum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +71,47 @@ public class SetMobile extends AppCompatActivity {
         mobileEt = findViewById(R.id.mobile);
         submitbtn = findViewById(R.id.submitbtn);
         progressbar = findViewById(R.id.progressbar);
+
+        setmobile = findViewById(R.id.setmobile);
+        enterinfo = findViewById(R.id.enterinfo);
+        localnum = findViewById(R.id.localnum);
+
+        int nightModeFlags =
+                getBaseContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                //night mode
+
+                getWindow().setStatusBarColor(Color.parseColor("#222222"));
+                setmobile.setBackgroundColor(Color.parseColor("#222222"));
+                enterinfo.setTextColor(Color.parseColor("#fafafa"));
+                localnum.setBackgroundResource(R.drawable.dm_bordered);
+                localnum.setTextColor(Color.parseColor("#fafafa"));
+                submitbtn.setTextColor(Color.parseColor("#222222"));
+                mobileEt.setBackgroundResource(R.drawable.dm_bordered);
+                mobileEt.setTextColor(Color.parseColor("#fafafa"));
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+            case Configuration.UI_MODE_NIGHT_NO:
+                //light mode
+                setTheme(R.style.LightTheme);
+                setmobile.setBackgroundColor(Color.parseColor("#FAFAFA"));
+                enterinfo.setTextColor(Color.parseColor("#222222"));
+
+                localnum.setBackgroundResource(R.drawable.bordered);
+                submitbtn.setTextColor(Color.parseColor("#FFFFFF"));
+                localnum.setTextColor(Color.parseColor("#222222"));
+                mobileEt.setBackgroundResource(R.drawable.bordered);
+                mobileEt.setTextColor(Color.parseColor("#222222"));
+                break;
+        }
+
+
+
+
+
+
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override

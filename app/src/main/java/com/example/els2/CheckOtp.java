@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +65,9 @@ public class CheckOtp extends AppCompatActivity {
     SharedPreferences.Editor editor;
     int time = 59;
     DatabaseReference accounts = FirebaseDatabase.getInstance().getReference("Users");
+
+    RelativeLayout checkotp;
+
     @SuppressLint({"SetTextI18n", "CommitPrefEdits"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,7 @@ public class CheckOtp extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+        checkotp = findViewById(R.id.checkotp);
         context = getApplicationContext();
         texthelper = findViewById(R.id.texthelper);
         texthelper.setText("Please type the verification code\nsent to +63" + getIntent().getStringExtra("mobile"));
@@ -107,6 +113,54 @@ public class CheckOtp extends AppCompatActivity {
 
         verId = getIntent().getStringExtra("verId");
         mobile = getIntent().getStringExtra("mobile");
+
+
+
+        int nightModeFlags =
+                getBaseContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                //night mode
+                setTheme(R.style.DarkTheme);
+                getWindow().setStatusBarColor(Color.parseColor("#222222"));
+
+                checkotp.setBackgroundColor(Color.parseColor("#222222"));
+                texthelper.setTextColor(Color.parseColor("#fafafa"));
+                et1.setTextColor(Color.parseColor("#fafafa"));
+                et2.setTextColor(Color.parseColor("#fafafa"));
+                et3.setTextColor(Color.parseColor("#fafafa"));
+                et4.setTextColor(Color.parseColor("#fafafa"));
+                et5.setTextColor(Color.parseColor("#fafafa"));
+                et6.setTextColor(Color.parseColor("#fafafa"));
+                valid.setTextColor(Color.parseColor("#fafafa"));
+                submitbtn.setTextColor(Color.parseColor("#222222"));
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+            case Configuration.UI_MODE_NIGHT_NO:
+                //light mode
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+                setTheme(R.style.LightTheme);
+                checkotp.setBackgroundColor(Color.parseColor("#fafafa"));
+                texthelper.setTextColor(Color.parseColor("#222222"));
+
+                et1.setTextColor(Color.parseColor("#222222"));
+                et2.setTextColor(Color.parseColor("#222222"));
+                et3.setTextColor(Color.parseColor("#222222"));
+                et4.setTextColor(Color.parseColor("#222222"));
+                et5.setTextColor(Color.parseColor("#222222"));
+                et6.setTextColor(Color.parseColor("#222222"));
+
+                valid.setTextColor(Color.parseColor("#222222"));
+                submitbtn.setTextColor(Color.parseColor("#fafafa"));
+                break;
+        }
+
+
+
 
         et1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,24 +274,23 @@ public class CheckOtp extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()){
-                                            Query q = accounts.orderByChild("number").equalTo("+63" + mobile);
+                                            Query q = accounts.orderByKey().equalTo("+63" + mobile);
                                             q.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.exists()){
-                                                        Log.d("account", "onDataChange: " + "+63" + mobile);
                                                         //has Account
-                                                        int age = snapshot.child("+63" + mobile).child("age").getValue(Integer.class);
-                                                        String fn = snapshot.child("+63" + mobile).child("firstname").getValue(String.class);
-                                                        String ln = snapshot.child("+63" + mobile).child("lastname").getValue(String.class);
-                                                        String bd = snapshot.child("+63" + mobile).child("birthdate").getValue(String.class);
-                                                        String sx = snapshot.child("+63" + mobile).child("sex").getValue(String.class);
-                                                        String bt = snapshot.child("+63" + mobile).child("bloodtype").getValue(String.class);
-                                                        String we = snapshot.child("+63" + mobile).child("weight").getValue(String.class);
-                                                        String he = snapshot.child("+63" + mobile).child("height").getValue(String.class);
-                                                        String mc = snapshot.child("+63" + mobile).child("conditions").getValue(String.class);
-                                                        String al = snapshot.child("+63" + mobile).child("allergies").getValue(String.class);
-                                                        String mn = snapshot.child("+63" + mobile).child("mednotes").getValue(String.class);
+                                                        int age = snapshot.child("+63" + mobile).child("info").child("age").getValue(Integer.class);
+                                                        String fn = snapshot.child("+63" + mobile).child("info").child("firstname").getValue(String.class);
+                                                        String ln = snapshot.child("+63" + mobile).child("info").child("lastname").getValue(String.class);
+                                                        String bd = snapshot.child("+63" + mobile).child("info").child("birthdate").getValue(String.class);
+                                                        String sx = snapshot.child("+63" + mobile).child("info").child("sex").getValue(String.class);
+                                                        String bt = snapshot.child("+63" + mobile).child("info").child("bloodtype").getValue(String.class);
+                                                        String we = snapshot.child("+63" + mobile).child("info").child("weight").getValue(String.class);
+                                                        String he = snapshot.child("+63" + mobile).child("info").child("height").getValue(String.class);
+                                                        String mc = snapshot.child("+63" + mobile).child("info").child("conditions").getValue(String.class);
+                                                        String al = snapshot.child("+63" + mobile).child("info").child("allergies").getValue(String.class);
+                                                        String mn = snapshot.child("+63" + mobile).child("info").child("mednotes").getValue(String.class);
 
                                                         editor.putBoolean("hasMobile",true);
                                                         editor.putBoolean("hasInstructed",true);

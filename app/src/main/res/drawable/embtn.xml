@@ -7,11 +7,14 @@
     <size
         android:width="50dp"
         android:height="50dp"/>
-    <gradient
-        android:startColor="#e53935"
-        android:endColor="#ff8a80"
-        android:angle="45"
+    <solid
+        android:color="#ef5350"
         />
     <corners android:radius="360dp"
         />
+    <stroke
+        android:color="#FFF"
+        android:width="10px"
+        />
 </shape>
+

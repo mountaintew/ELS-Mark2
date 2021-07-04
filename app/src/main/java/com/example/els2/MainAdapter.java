@@ -1,7 +1,6 @@
 package com.example.els2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,12 +39,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         //Initialize Contact model
         ContactModel contactModel = arrayList.get(position);
 
-
         //Set name
         holder.tvName.setText(contactModel.getName());;
         //Set number
         holder.tvNumber.setText(contactModel.getNumber());;
-
     }
 
     @Override
@@ -56,7 +53,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName, tvNumber;
         OnContactListener onContactListener;
-
 
         public ViewHolder(@NonNull View itemView, OnContactListener onContactListener) {
             super(itemView);

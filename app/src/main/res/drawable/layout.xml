@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape
+                    android:shape="rectangle"
+                    android:thicknessRatio="55"
+                    >
+                    <size
+                        android:width="50dp"
+                        android:height="50dp"/>
+
+                    <solid
+                        android:color="#EEEEEE"/>
+                </shape>
+            </item>
+
+            <item
+                android:drawable="@drawable/circle_transparent"
+                android:gravity="center"
+                android:width="50dp"
+                android:height="50dp"
+
+                />
+        </layer-list>
+    </item>
+</selector>

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="256dp"
+    android:layout_height="wrap_content"
     android:paddingTop="15dp"
     android:gravity="center"
     android:orientation="vertical">
@@ -19,14 +19,14 @@
 
         <ImageView
             android:id="@+id/notif_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/square_b"
-            android:backgroundTint="@color/metatext" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circle"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -37,7 +37,7 @@
                 android:fontFamily="@font/productsans"
                 android:gravity="left"
                 android:paddingStart="15dp"
-                android:text="Name"
+                android:text="Lester Arana"
                 android:textColor="@color/dark"
                 android:textSize="26sp" />
 
@@ -57,9 +57,8 @@
                 android:fontFamily="@font/productsans"
                 android:gravity="left"
                 android:paddingStart="15dp"
-                android:text="09566189375"
                 android:textColor="@color/dark"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
 
         </LinearLayout>

@@ -2,48 +2,73 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebebeb"
+
     tools:context=".Dashboard">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/profile_bg"/>
-
 
     <RelativeLayout
         android:id="@+id/sub_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:background="@drawable/menu_bg">
-
+        android:layout_height="match_parent">
         <!--PROFILE-->
         <LinearLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="30dp">
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            >
 
+            <!--Profile Pic-->
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp">
 
-            <ImageView
-                android:id="@+id/profilepic"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_prof_sub"
-                android:backgroundTint="#ebebeb"
-                android:clickable="true"
-                android:focusable="true" />
+                <ImageButton
+                    android:id="@+id/profilepic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/circle_addprofile"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="fitCenter"
+                    android:translationX="1dp" />
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/safe_anim"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:lottie_autoPlay="false"
+                    app:lottie_enableMergePathsForKitKatAndAbove="true"
+                    app:lottie_fileName="safe_progress.json"
+                    app:lottie_loop="false" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/em_anim"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:lottie_autoPlay="false"
+                    app:lottie_enableMergePathsForKitKatAndAbove="true"
+                    app:lottie_fileName="em_progress.json"
+                    app:lottie_loop="false" />
+            </RelativeLayout>
+            <!--Profile Pic-->
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -52,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsans"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text="Name"
                     android:textColor="@color/dark"
                     android:textSize="26sp" />
@@ -62,53 +87,334 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsans"
-                    android:gravity="center_vertical"
-                    android:text="+639566189375"
+                    android:gravity="center"
+                    android:text="+639999999999"
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
+
+
+
             </LinearLayout>
+
+
         </LinearLayout>
         <!--/PROFILE-->
 
+        <RelativeLayout
+            android:id="@+id/stateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_layout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
 
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/profile_layout"
-            android:layout_above="@id/menu_layout">
+            android:layout_above="@id/menu_layout"
+            android:layout_below="@id/stateLayout">
 
 
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/redanim"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+
+            <!-- Buttons-->
+            <LinearLayout
+                android:id="@+id/btnset1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
+                    <RelativeLayout
+                        android:id="@+id/floodLo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone">
+                        <Button
+                            android:id="@+id/floodbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ripple_floodbtn"
+                            android:fontFamily="@font/bold"
+                            android:hapticFeedbackEnabled="true"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark"
+                            android:textSize="18sp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:elevation="3dp">
+
+                            <ImageView
+                                android:id="@+id/floodic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="28dp"
+                                android:background="@drawable/ic_flood"
+                                />
+                            <TextView
+                                android:id="@+id/floodlbl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/floodic"
+                                android:fontFamily="@font/bold"
+                                android:gravity="center"
+                                android:text="Flood"
+                                />
+
+                        </RelativeLayout>
+
+
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
+                    <RelativeLayout
+                        android:id="@+id/fireLo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/firebtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ripple_firebtn"
+                            android:fontFamily="@font/bold"
+                            android:hapticFeedbackEnabled="true"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark"
+                            android:textSize="18sp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:elevation="3dp">
+
+
+                            <ImageView
+                                android:id="@+id/fireic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="28dp"
+                                android:background="@drawable/ic_fire"
+                                />
+                            <TextView
+                                android:id="@+id/firelbl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/fireic"
+                                android:fontFamily="@font/bold"
+                                android:gravity="center"
+                                android:text="Fire"
+                                />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnset1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
+                    <RelativeLayout
+                        android:id="@+id/medLo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/medicalbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ripple_medbtn"
+                            android:fontFamily="@font/bold"
+                            android:hapticFeedbackEnabled="true"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark"
+                            android:textSize="18sp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:elevation="3dp">
+                            <ImageView
+                                android:id="@+id/medic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/ic_medical"
+                                />
+                            <TextView
+                                android:id="@+id/medlbl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/medic"
+                                android:fontFamily="@font/bold"
+                                android:gravity="center"
+                                android:text="Medical"
+                                />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
+                    <RelativeLayout
+                        android:id="@+id/otherLo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone">
+                        <Button
+                            android:id="@+id/othersbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ripple_othersbtn"
+                            android:fontFamily="@font/bold"
+                            android:hapticFeedbackEnabled="true"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark"
+                            android:textSize="18sp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:elevation="3dp">
+                            <ImageView
+                                android:id="@+id/otheric"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/ic_others"
+                                />
+                            <TextView
+                                android:id="@+id/otherlbl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/otheric"
+                                android:fontFamily="@font/bold"
+                                android:gravity="center"
+                                android:text="Others"
+                                />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            </RelativeLayout>
+            <!--Buttons-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/waiting"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                app:lottie_autoPlay="false"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
                 app:lottie_enableMergePathsForKitKatAndAbove="true"
                 app:lottie_fileName="red.json"
                 app:lottie_loop="true" />
 
-
             <Button
                 android:id="@+id/embtn"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/embtn"
+                android:background="@drawable/ripple_embtn"
                 android:fontFamily="@font/bold"
                 android:hapticFeedbackEnabled="true"
-                android:text="Emergency"
+                android:text="@string/emergency"
                 android:textAllCaps="false"
                 android:textColor="@color/white"/>
 
+        <RelativeLayout
+            android:id="@+id/cancel_layout"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+            <Button
+                android:id="@+id/cancel_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_round_close_24"
+                android:fontFamily="@font/bold"
+                android:hapticFeedbackEnabled="true"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/em_load_anim"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:lottie_autoPlay="true"
+                app:lottie_enableMergePathsForKitKatAndAbove="true"
+                app:lottie_fileName="emer_loading.json"
+                app:lottie_loop="false" />
+            <TextView
+                android:id="@+id/sendingtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/productsans"
+                android:layout_below="@id/em_load_anim"
+                android:layout_marginTop="35dp"
+                android:text="Sending..."
+                android:textColor="@color/metatext"
+                />
+        </RelativeLayout>
 
         </RelativeLayout>
 
@@ -117,179 +423,108 @@
             android:id="@+id/menu_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="15dp"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="80dp">
-
-
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/menu_bg"
-                    android:backgroundTint="@color/white"
-                    android:elevation="5dp">
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
                     <Button
                         android:id="@+id/viewinfo"
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/menu_bg"
+                        android:background="@drawable/ripple"
                         android:hapticFeedbackEnabled="true"/>
-
                     <ImageView
+                        android:id="@+id/infoic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="10dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/menu_info_icon"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:elevation="10dp"
-                        android:fontFamily="@font/bold"
-                        android:gravity="left|center"
-                        android:padding="15dp"
-                        android:text="View Info"
-                        android:textColor="@color/red"/>
-
+                        android:background="@drawable/ic_info"
+                        android:elevation="10dp"/>
                 </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp">
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/menu_bg"
-                    android:backgroundTint="@color/white"
-                    android:elevation="5dp">
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
                     <Button
                         android:id="@+id/contactbtn"
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/menu_bg"
+                        android:background="@drawable/ripple"
                         android:hapticFeedbackEnabled="true"/>
-
                     <ImageView
+                        android:id="@+id/contactic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="10dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/menu_contacts_icon"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:elevation="10dp"
-                        android:fontFamily="@font/bold"
-                        android:gravity="center|left"
-                        android:layout_margin="15dp"
-                        android:text="@string/contacts"
-                        android:textColor="@color/red"/>
-
+                        android:background="@drawable/ic_contact"
+                        android:elevation="10dp"/>
                 </RelativeLayout>
-
-
-
             </LinearLayout>
-
-
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="80dp">
-
-
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/menu_bg"
-                    android:backgroundTint="@color/white"
-                    android:elevation="5dp">
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
                     <Button
                         android:id="@+id/myplacebtn"
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/menu_bg"
+                        android:background="@drawable/ripple"
                         android:hapticFeedbackEnabled="true"/>
-
                     <ImageView
+                        android:id="@+id/locic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="10dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/menu_place_icon"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:elevation="10dp"
-                        android:fontFamily="@font/bold"
-                        android:gravity="center|left"
-                        android:layout_margin="15dp"
-                        android:text="@string/my_place"
-                        android:textColor="@color/red"/>
-
+                        android:background="@drawable/placeicon"
+                        android:elevation="10dp"/>
                 </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp">
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/menu_bg"
-                    android:backgroundTint="@color/white"
-                    android:elevation="5dp">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
 
                     <Button
                         android:id="@+id/settingsbtn"
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/menu_bg"
+                        android:background="@drawable/ripple"
                         android:hapticFeedbackEnabled="true"/>
 
                     <ImageView
+                        android:id="@+id/settingsic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="15dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/menu_settings_icon"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:elevation="10dp"
-                        android:fontFamily="@font/bold"
-                        android:gravity="center|left"
-                        android:layout_margin="15dp"
-                        android:text="@string/settings"
-                        android:textColor="@color/red"/>
-
+                        android:background="@drawable/ic_settings"
+                        android:elevation="10dp"/>
                 </RelativeLayout>
-
-
-
             </LinearLayout>
 
         </LinearLayout>
@@ -333,13 +568,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/notiflbl"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/productsans"
                 android:gravity="center_vertical"
-                android:text="Notifications"
+                android:text="@string/notifications"
                 android:textColor="@color/dark"
                 android:textSize="16sp"
                 />
@@ -361,24 +597,58 @@
             android:id="@+id/location_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/embtn"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/loclbl"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/productsans"
                 android:gravity="center_vertical"
-                android:text="Location"
+                android:text="@string/location"
                 android:textColor="@color/dark"
                 android:textSize="16sp" />
 
             <ToggleButton
                 android:id="@+id/toggleLoc"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/toggle_selector"
+                android:hapticFeedbackEnabled="true"
+                android:textOff=""
+                android:textOn=""
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dm_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dmlbl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/productsans"
+                android:gravity="center_vertical"
+                android:text="Dark Mode"
+                android:textColor="@color/dark"
+                android:textSize="16sp" />
+
+            <ToggleButton
+                android:id="@+id/toggledm"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="15dp"
@@ -398,9 +668,9 @@
             android:layout_margin="25dp"
             android:background="@null"
             android:fontFamily="@font/productsans"
-            android:text="Close"
+            android:text="@string/close"
             android:textSize="11sp"
-            />
+            tools:ignore="SmallSp" />
 
     </LinearLayout>
 
@@ -411,6 +681,7 @@
         android:layout_height="match_parent"
         android:background="#E6000000"
         android:clickable="true"
+        android:contentDescription="@string/blurred_black"
         android:focusable="true"
         android:visibility="gone" />
 
